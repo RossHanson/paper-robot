@@ -1,0 +1,27 @@
+--------------------------Manipulator stuff and tabletop detection ---------
+Look at the tutorial at http://ros.org/wiki/pr2_tabletop_manipulation_apps/Tutorials/Writing%20a%20Simple%20Pick%20and%20Place%20Application
+     -This tutorial explains how to use the tabletop detector and object detection service
+     -Breaks down the code a lot better than some of the other tutorials
+
+
+--------------------------Dave's links on Vision----------------------------
+Below are the links I've been following.  The bottom command I got from a few pages/videos in.  It runs a program that gets vision from one of the PR2's cameras and streams it to the computer.  We're going to one to take from this to get the vision stream and then use OpenCV on it... I think.
+
+What have you gotten done so far?
+
+Dave Kelly
+
+opencv and ros
+http://www.ros.org/wiki/cv_bridge/Tutorials/UsingCvBridgeToConvertBetweenROSImagesAndOpenCVImages
+
+pr2 cameras
+http://pr2support.willowgarage.com/wiki/PR2%20Manual/Chapter9#Head_Cameras
+
+image pipeline
+http://ros.org/wiki/image_pipeline
+
+image tutorials! yay!
+http://ros.org/wiki/image_pipeline/Tutorials
+
+rosrun image_view image_view image:=/wide_stereo/left/image_rect_color
+

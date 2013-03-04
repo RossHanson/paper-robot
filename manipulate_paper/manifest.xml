@@ -1,0 +1,24 @@
+<package>
+  <description brief="manipulate_paper">
+
+     manipulate_paper
+
+  </description>
+  <author>Ross</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/manipulate_paper</url>
+  <depend package="arm_navigation_msgs"/>
+  <depend package="kinematics_msgs"/>
+  <depend package="actionlib_msgs"/>
+  <depend package="pr2_controllers_msgs"/>
+  <depend package="planning_environment"/>
+  <depend package="pr2_arm_navigation_perception"/>
+  <depend package="mapping_rviz_plugin"/>
+  <depend package="object_manipulation_msgs"/>
+  <depend package="tabletop_object_detector"/>
+  <depend package="tabletop_collision_map_processing"/>
+  <depend package="roscpp"/>
+</package>
+
+
