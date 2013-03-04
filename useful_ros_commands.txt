@@ -1,0 +1,11 @@
+//streams vision
+rosrun image_view image_view image:=/wide_stereo/left/image_rect_color
+
+//our version of vision
+rosrun vision_test image_view image:=/wide_stereo/left/image_rect_color
+
+//to run gazebo
+roslaunch pr2_gazebo pr2_empty_world.launch
+
+//to run gazebo with stuff already in it
+roslaunch pr2_gazebo pr2<tab-complete to see the options>
