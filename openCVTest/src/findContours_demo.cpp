@@ -16,7 +16,7 @@ using namespace std;
 Mat src; 
 Mat src_gray;
 Mat output;
-int thresh = 100;
+int thresh = 255;
 int red = 100;
 int green = 100;
 int blue = 100;
@@ -77,22 +77,22 @@ int main( int, char** argv )
   imshow( "L", luv[2] );
   namedWindow( "U", CV_WINDOW_AUTOSIZE );
   imshow( "U", luv[1] );
-  namedWindow( "V", CV_WINDOW_AUTOSIZE );
-  imshow( "V", luv[0] );
+  namedWindow( "lV", CV_WINDOW_AUTOSIZE );
+  imshow( "lV", luv[0] );
   
   namedWindow( "H", CV_WINDOW_AUTOSIZE );
   imshow( "H", hsv[2] );
   namedWindow( "S", CV_WINDOW_AUTOSIZE );
   imshow( "S", hsv[1] );
-  namedWindow( "V", CV_WINDOW_AUTOSIZE );
-  imshow( "V", hsv[0] );
+  namedWindow( "hV", CV_WINDOW_AUTOSIZE );
+  imshow( "hV", hsv[0] );
   
   /// Convert image to gray and blur it
   cvtColor( src, src_gray, CV_BGR2GRAY );
   blur( src_gray, src_gray, Size(3,3) );
 
   //set image to be processed
-  output = rgb[1];
+  output = luv[1];
   
   /// Create Window
   const char* source_window = "Source";
@@ -121,7 +121,7 @@ void thresh_callback(int, void* )
   vector<Vec4i> hierarchy;
 
   /// Detect edges using canny
-  Canny( src_gray, canny_output, thresh, thresh*2, 3 );
+  Canny( output, canny_output, thresh, thresh*2, 3 );
   /// Find contours
   findContours( canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
 
