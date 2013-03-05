@@ -15,6 +15,7 @@ using namespace std;
 
 Mat src; 
 Mat src_gray;
+Mat output;
 int thresh = 100;
 int red = 100;
 int green = 100;
@@ -34,13 +35,37 @@ int main( int, char** argv )
   /// Load source image and convert it to gray
   src = imread( argv[1], 1 );
 
-  //create filtered windows
+  //create 3 seperate color spaces (9 color channels)
+  //rgb
   vector<Mat> rgb;
-  split(src, rgb);
+  split(src, rgb);  
+  
+  //luv
+  Mat luvMat;
+  vector<Mat> luv;
+  cvtColor( src, luvMat, CV_BGR2XYZ );
+  split(luvMat, luv);
+  
+  //hsv
+  Mat hsvMat;
+  vector<Mat> hsv;
+  cvtColor( src, hsvMat, CV_BGR2HSV );
+  split(hsvMat, hsv);
+  
+  //blur the channels
   blur( rgb[0], rgb[0], Size(3,3) );
   blur( rgb[1], rgb[1], Size(3,3) );
   blur( rgb[2], rgb[2], Size(3,3) );
   
+  blur( luv[0], luv[0], Size(3,3) );
+  blur( luv[1], luv[1], Size(3,3) );
+  blur( luv[2], luv[2], Size(3,3) );
+  
+  blur( hsv[0], hsv[0], Size(3,3) );
+  blur( hsv[1], hsv[1], Size(3,3) );
+  blur( hsv[2], hsv[2], Size(3,3) );
+  
+  //output
   namedWindow( "Red", CV_WINDOW_AUTOSIZE );
   imshow( "Red", rgb[2] );
   namedWindow( "Blue", CV_WINDOW_AUTOSIZE );
@@ -48,7 +73,20 @@ int main( int, char** argv )
   namedWindow( "Green", CV_WINDOW_AUTOSIZE );
   imshow( "Green", rgb[0] );
   
-
+  namedWindow( "L", CV_WINDOW_AUTOSIZE );
+  imshow( "L", luv[2] );
+  namedWindow( "U", CV_WINDOW_AUTOSIZE );
+  imshow( "U", luv[1] );
+  namedWindow( "V", CV_WINDOW_AUTOSIZE );
+  imshow( "V", luv[0] );
+  
+  namedWindow( "H", CV_WINDOW_AUTOSIZE );
+  imshow( "H", hsv[2] );
+  namedWindow( "S", CV_WINDOW_AUTOSIZE );
+  imshow( "S", hsv[1] );
+  namedWindow( "V", CV_WINDOW_AUTOSIZE );
+  imshow( "V", hsv[0] );
+  
   /// Convert image to gray and blur it
   cvtColor( src, src_gray, CV_BGR2GRAY );
   blur( src_gray, src_gray, Size(3,3) );
