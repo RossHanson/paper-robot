@@ -237,3 +237,9 @@ int main(int argc, char **argv)
   ROS_INFO("Success! Object moved.");
   return 0;
 }
+
+object_manipulation_msgs::Grasp setupPreGrasp(){
+  object_manipulation_msgs::Grasp grasp;
+  
+  return grasp;
+}
