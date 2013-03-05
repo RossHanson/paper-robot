@@ -1,0 +1,14 @@
+<package>
+  <description brief="openCVTest">
+
+     openCVTest
+
+  </description>
+  <author>David</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/openCVTest</url>
+
+</package>
+
+

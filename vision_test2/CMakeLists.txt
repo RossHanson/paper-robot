@@ -23,12 +23,12 @@ rosbuild_add_boost_directories()
 find_package(OpenCV)
 
 # Nodelet library
-rosbuild_add_library(image_view src/nodelets/image_nodelet.cpp src/nodelets/disparity_nodelet.cpp src/nodelets/window_thread.cpp)
-target_link_libraries(image_view ${GTK_LIBRARIES})
-target_link_libraries(image_view
+rosbuild_add_library(vision_test2 src/nodelets/image_nodelet.cpp src/nodelets/disparity_nodelet.cpp src/nodelets/window_thread.cpp)
+target_link_libraries(vision_test2 ${GTK_LIBRARIES})
+target_link_libraries(vision_test2
                       ${OpenCV_LIBRARIES}
 )
-rosbuild_link_boost(image_view thread)
+rosbuild_link_boost(vision_test2 thread)
 
 # Image viewers
 rosbuild_add_executable(image_view_exe src/nodes/image_view.cpp)
