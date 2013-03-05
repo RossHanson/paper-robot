@@ -4,6 +4,9 @@
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "image_view", ros::init_options::AnonymousName);
+  
+  printf("===============entered the main function====================\n");
+  
   if (ros::names::remap("image") == "image") {
     ROS_WARN("Topic 'image' has not been remapped! Typical command-line usage:\n"
              "\t$ rosrun image_view image_view image:=<image topic> [transport]");

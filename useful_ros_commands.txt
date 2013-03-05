@@ -2,7 +2,7 @@
 rosrun image_view image_view image:=/wide_stereo/left/image_rect_color
 
 //our version of vision
-rosrun vision_test image_view image:=/wide_stereo/left/image_rect_color
+rosrun vision_test2 image_view image:=/wide_stereo/left/image_rect_color
 
 //to run gazebo
 roslaunch pr2_gazebo pr2_empty_world.launch

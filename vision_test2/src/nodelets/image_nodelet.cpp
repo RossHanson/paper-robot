@@ -121,7 +121,11 @@ void ImageNodelet::onInit()
 
 void ImageNodelet::imageCb(const sensor_msgs::ImageConstPtr& msg)
 {
+  
+    printf("===========entered imageCb================\n");
   image_mutex_.lock();
+  
+
 
   // May want to view raw bayer data, which CvBridge doesn't know about
   if (msg->encoding.find("bayer") != std::string::npos)
