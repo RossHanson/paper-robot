@@ -151,8 +151,8 @@ int main(int argc, char **argv)
   direction.vector.z = 1;
   pickup_goal.lift.direction = direction;
   //request a vertical lift of 10cm after grasping the object
-  pickup_goal.lift.desired_distance = 0.1;
-  pickup_goal.lift.min_distance = 0.05;
+  pickup_goal.lift.desired_distance = 0.2;
+  pickup_goal.lift.min_distance = 0.1;
   //do not use tactile-based grasping or tactile-based lift
   pickup_goal.use_reactive_lift = false;
   pickup_goal.use_reactive_execution = false;
@@ -178,7 +178,7 @@ int main(int argc, char **argv)
   //identity pose
   place_location.pose.orientation.w = 1;  
   place_location.header.stamp = ros::Time::now();
-  place_location.pose.position.x += 0.1;
+  place_location.pose.position.x -= 0.2;
 
 
 
