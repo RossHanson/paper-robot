@@ -28,3 +28,8 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
+
+find_package(OpenCV)
+
+rosbuild_add_executable(findContours_demo src/findContours_demo.cpp)
+target_link_libraries(findContours_demo ${OpenCV_LIBRARIES})

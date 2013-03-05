@@ -13,9 +13,14 @@
 using namespace cv;
 using namespace std;
 
-Mat src; Mat src_gray;
+Mat src; 
+Mat src_gray;
 int thresh = 100;
+int red = 100;
+int green = 100;
+int blue = 100;
 int max_thresh = 255;
+int max_color = 255;
 RNG rng(12345);
 
 /// Function header
@@ -29,16 +34,39 @@ int main( int, char** argv )
   /// Load source image and convert it to gray
   src = imread( argv[1], 1 );
 
+  //create filtered windows
+  vector<Mat> rgb;
+  split(src, rgb);
+  blur( rgb[0], rgb[0], Size(3,3) );
+  blur( rgb[1], rgb[1], Size(3,3) );
+  blur( rgb[2], rgb[2], Size(3,3) );
+  
+  namedWindow( "Red", CV_WINDOW_AUTOSIZE );
+  imshow( "Red", rgb[2] );
+  namedWindow( "Blue", CV_WINDOW_AUTOSIZE );
+  imshow( "Blue", rgb[1] );
+  namedWindow( "Green", CV_WINDOW_AUTOSIZE );
+  imshow( "Green", rgb[0] );
+  
+
   /// Convert image to gray and blur it
   cvtColor( src, src_gray, CV_BGR2GRAY );
   blur( src_gray, src_gray, Size(3,3) );
 
+  //set image to be processed
+  output = rgb[1];
+  
   /// Create Window
   const char* source_window = "Source";
   namedWindow( source_window, CV_WINDOW_AUTOSIZE );
   imshow( source_window, src );
+  
 
+  //create trackbars
   createTrackbar( " Canny thresh:", "Source", &thresh, max_thresh, thresh_callback );
+  //createTrackbar( " Red:", "Source", &red, max_color, thresh_callback );
+  //createTrackbar( " Green:", "Source", &green, max_color, thresh_callback );
+  //createTrackbar( " Blue:", "Source", &blue, max_color, thresh_callback );
   thresh_callback( 0, 0 );
 
   waitKey(0);
