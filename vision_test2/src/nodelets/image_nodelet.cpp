@@ -9,8 +9,12 @@
 #include <boost/thread.hpp>
 #include <boost/format.hpp>
 
+//#include <std>
+
 #ifdef HAVE_GTK
 #include <gtk/gtk.h>
+
+using namespace std;
 
 // Platform-specific workaround for #3026: image_view doesn't close when
 // closing image window. On platforms using GTK+ we connect this to the
@@ -69,6 +73,7 @@ ImageNodelet::~ImageNodelet()
 
 void ImageNodelet::onInit()
 {
+  printf("===========entered onInit() in image_nodelett.cpp================\n");
   ros::NodeHandle nh = getNodeHandle();
   ros::NodeHandle local_nh = getPrivateNodeHandle();
 
@@ -123,7 +128,7 @@ void ImageNodelet::imageCb(const sensor_msgs::ImageConstPtr& msg)
 {
   image_mutex_.lock();
   
-  printf("===========entered imageCb================\n");
+  cout<<"===========entered imageCb in image_nodelett.cpp================\n";
 
   // May want to view raw bayer data, which CvBridge doesn't know about
   if (msg->encoding.find("bayer") != std::string::npos)
@@ -176,10 +181,15 @@ void ImageNodelet::imageCb(const sensor_msgs::ImageConstPtr& msg)
 
 void ImageNodelet::mouseCb(int event, int x, int y, int flags, void* param)
 {
+  printf("===========entered mouseCb in image_nodelett.cpp================\n");
+  cout<<"===========entered mouseCb in image_nodelett.cpp================\n";
+  
   ImageNodelet *this_ = reinterpret_cast<ImageNodelet*>(param);
   // Trick to use NODELET_* logging macros in static function
   boost::function<const std::string&()> getName =
     boost::bind(&ImageNodelet::getName, this_);
+  
+  NODELET_INFO("===========entered mouseCb in image_nodelett.cpp================\n");
   
   if (event == CV_EVENT_LBUTTONDOWN)
   {
@@ -201,7 +211,7 @@ void ImageNodelet::mouseCb(int event, int x, int y, int flags, void* param)
   std::string filename = (this_->filename_format_ % this_->count_).str();
   if (cv::imwrite(filename, image))
   {
-    NODELET_INFO("Saved image %s", filename.c_str());
+    //NODELET_INFO("Saved image %s", filename.c_str());
     this_->count_++;
   }
   else

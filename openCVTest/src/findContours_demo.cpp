@@ -135,16 +135,32 @@ void thresh_callback(int, void* )
   /// Detect edges using canny
   //canny_output = threshedMat;
   Canny( threshedMat, canny_output, threshCanny, threshCanny*2, 3 );
+  
   /// Find contours
   findContours( canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
 
+  /// Approximate contours to polygons + get bounding rects and circles
+  vector<vector<Point> > contours_poly( contours.size() );
+  vector<Rect> boundRect( contours.size() );
+  vector<Point2f>center( contours.size() );
+  vector<float>radius( contours.size() );
+
+  for( int i = 0; i < contours.size(); i++ ) { 
+    approxPolyDP( Mat(contours[i]), contours_poly[i], 3, true );
+    boundRect[i] = boundingRect( Mat(contours_poly[i]) );
+    minEnclosingCircle( (Mat)contours_poly[i], center[i], radius[i] );
+  }
+
   /// Draw contours
   Mat drawing = Mat::zeros( canny_output.size(), CV_8UC3 );
-  for( size_t i = 0; i< contours.size(); i++ )
-     {
-       Scalar color = Scalar( rng.uniform(0, 255), rng.uniform(0,255), rng.uniform(0,255) );
-       drawContours( drawing, contours, (int)i, color, 2, 8, hierarchy, 0, Point() );
-     }
+  for( size_t i = 0; i< contours.size(); i++ ) {
+    Scalar color = Scalar( rng.uniform(0, 255), rng.uniform(0,255), rng.uniform(0,255) );
+    //drawContours( drawing, contours, (int)i, color, 2, 8, hierarchy, 0, Point() );
+    drawContours( drawing, contours_poly, i, color, 1, 8, vector<Vec4i>(), 0, Point() );
+    rectangle( drawing, boundRect[i].tl(), boundRect[i].br(), color, 2, 8, 0 );
+    circle( drawing, center[i], 1, color, 2, 8, 0 );
+    //circle( drawing, center[i], (int)radius[i], color, 2, 8, 0 );
+  }
 
   /// Show in a window
   namedWindow( "Contours", CV_WINDOW_AUTOSIZE );
