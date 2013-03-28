@@ -19,6 +19,9 @@
   <depend package="tabletop_object_detector"/>
   <depend package="tabletop_collision_map_processing"/>
   <depend package="roscpp"/>
+  <depend package="ee_cart_imped_action" />
+  <depend package="ee_cart_imped_msgs" />
+  
 </package>
 
 
