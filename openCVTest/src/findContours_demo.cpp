@@ -74,26 +74,26 @@ int main( int, char** argv )
   blur( hsv[2], hsv[2], Size(3,3) );
   
   //output
-  namedWindow( "Red", CV_WINDOW_AUTOSIZE );
+  /*namedWindow( "Red", CV_WINDOW_AUTOSIZE );
   imshow( "Red", rgb[2] );
   namedWindow( "Blue", CV_WINDOW_AUTOSIZE );
   imshow( "Blue", rgb[1] );
   namedWindow( "Green", CV_WINDOW_AUTOSIZE );
-  imshow( "Green", rgb[0] );
+  imshow( "Green", rgb[0] );*/
   
-  namedWindow( "L", CV_WINDOW_AUTOSIZE );
+  /*namedWindow( "L", CV_WINDOW_AUTOSIZE );
   imshow( "L", luv[2] );
   namedWindow( "U", CV_WINDOW_AUTOSIZE );
-  imshow( "U", luv[1] );
+  imshow( "U", luv[1] );*/
   namedWindow( "lV", CV_WINDOW_AUTOSIZE );
   imshow( "lV", luv[0] );
   
-  namedWindow( "H", CV_WINDOW_AUTOSIZE );
+  /*namedWindow( "H", CV_WINDOW_AUTOSIZE );
   imshow( "H", hsv[2] );
   namedWindow( "S", CV_WINDOW_AUTOSIZE );
   imshow( "S", hsv[1] );
   namedWindow( "hV", CV_WINDOW_AUTOSIZE );
-  imshow( "hV", hsv[0] );
+  imshow( "hV", hsv[0] );*/
   
   /// Convert image to gray and blur it
   cvtColor( src, src_gray, CV_BGR2GRAY );
@@ -110,7 +110,7 @@ int main( int, char** argv )
 
   //create trackbars
   createTrackbar( " Canny thresh:", "Source", &threshCanny, max_thresh, thresh_callback );
-  createTrackbar( " Thresholding:", "Source", &threshVal, max_thresh, thresh_callback );
+  //createTrackbar( " Thresholding:", "Source", &threshVal, max_thresh, thresh_callback );
   thresh_callback( 0, 0 );
 
   waitKey(0);
@@ -129,9 +129,11 @@ void thresh_callback(int, void* )
   vector<Vec4i> hierarchy;
   
   //threshedMat = outputMat;
-  threshold(outputMat, threshedMat, threshVal, 255, CV_THRESH_BINARY);
+  threshedMat = outputMat;
+  //threshold(outputMat, threshedMat, threshVal, 255, CV_THRESH_BINARY);
   
   /// Detect edges using canny
+  //canny_output = threshedMat;
   Canny( threshedMat, canny_output, threshCanny, threshCanny*2, 3 );
   /// Find contours
   findContours( canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
@@ -146,6 +148,7 @@ void thresh_callback(int, void* )
 
   /// Show in a window
   namedWindow( "Contours", CV_WINDOW_AUTOSIZE );
-  imshow( "Threshed", threshedMat);
+  imshow( "Canny", canny_output);
+  //imshow( "Threshed", threshedMat);
   imshow( "Contours", drawing );
 }
