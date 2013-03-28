@@ -6,6 +6,9 @@
 
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
+//#include <cxcore.h>
+//#include <ml.h>
+#include <cv.h>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,16 +16,21 @@
 using namespace cv;
 using namespace std;
 
-Mat src; 
+Mat src;
 Mat src_gray;
-Mat output;
-int thresh = 255;
+//IplImage* outputIpl;
+//IplImage* threshedOutput;
+//IplImage* originalIpl;
+Mat outputMat;
+int threshCanny = 255;
+int threshVal = 125;
 int red = 100;
 int green = 100;
 int blue = 100;
 int max_thresh = 255;
 int max_color = 255;
 RNG rng(12345);
+const char* outputWindow;
 
 /// Function header
 void thresh_callback(int, void* );
@@ -32,9 +40,9 @@ void thresh_callback(int, void* );
  */
 int main( int, char** argv )
 {
-  /// Load source image and convert it to gray
-  src = imread( argv[1], 1 );
-
+  // Load source image and convert it to gray
+  src = imread( argv[1], 1 );  
+  
   //create 3 seperate color spaces (9 color channels)
   //rgb
   vector<Mat> rgb;
@@ -43,7 +51,7 @@ int main( int, char** argv )
   //luv
   Mat luvMat;
   vector<Mat> luv;
-  cvtColor( src, luvMat, CV_BGR2XYZ );
+  cvtColor( src, luvMat, CV_BGR2Luv );
   split(luvMat, luv);
   
   //hsv
@@ -92,7 +100,7 @@ int main( int, char** argv )
   blur( src_gray, src_gray, Size(3,3) );
 
   //set image to be processed
-  output = luv[1];
+  outputMat = luv[0];
   
   /// Create Window
   const char* source_window = "Source";
@@ -101,13 +109,12 @@ int main( int, char** argv )
   
 
   //create trackbars
-  createTrackbar( " Canny thresh:", "Source", &thresh, max_thresh, thresh_callback );
-  //createTrackbar( " Red:", "Source", &red, max_color, thresh_callback );
-  //createTrackbar( " Green:", "Source", &green, max_color, thresh_callback );
-  //createTrackbar( " Blue:", "Source", &blue, max_color, thresh_callback );
+  createTrackbar( " Canny thresh:", "Source", &threshCanny, max_thresh, thresh_callback );
+  createTrackbar( " Thresholding:", "Source", &threshVal, max_thresh, thresh_callback );
   thresh_callback( 0, 0 );
 
   waitKey(0);
+  
   return(0);
 }
 
@@ -117,11 +124,15 @@ int main( int, char** argv )
 void thresh_callback(int, void* )
 {
   Mat canny_output;
+  Mat threshedMat;
   vector<vector<Point> > contours;
   vector<Vec4i> hierarchy;
-
+  
+  //threshedMat = outputMat;
+  threshold(outputMat, threshedMat, threshVal, 255, CV_THRESH_BINARY);
+  
   /// Detect edges using canny
-  Canny( output, canny_output, thresh, thresh*2, 3 );
+  Canny( threshedMat, canny_output, threshCanny, threshCanny*2, 3 );
   /// Find contours
   findContours( canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
 
@@ -135,5 +146,6 @@ void thresh_callback(int, void* )
 
   /// Show in a window
   namedWindow( "Contours", CV_WINDOW_AUTOSIZE );
+  imshow( "Threshed", threshedMat);
   imshow( "Contours", drawing );
 }
