@@ -1,7 +1,7 @@
 # Build and Release Folders
-bin/
-bin-debug/
-bin-release/
+manipulate_paper/bin/
+manipulate_paper/bin-debug/
+manipulate_paper/bin-release/
 
 
 # Other files and folders
