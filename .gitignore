@@ -2,7 +2,7 @@
 manipulate_paper/bin/
 manipulate_paper/bin-debug/
 manipulate_paper/bin-release/
-
+*~
 
 # Other files and folders
 .settings/
