@@ -39,9 +39,9 @@ public:
     image_sub_ = it_.subscribe("/wide_stereo/left/image_rect_color", 1, &ImageConverter::imageCb, this);
 
     threshCanny = 255;
-    threshVal = 125;
+    threshVal = 117;
     max_thresh = 255;
-    minRectSize = 0;
+    minRectSize = 1200;
     maxRectSize = 4096;
     rng = RNG(12345);
 
@@ -160,7 +160,7 @@ public:
     for( int i = 0; i < contours.size(); i++ ) { 
         approxPolyDP( Mat(contours[i]), contours_poly[i], 3, true );
         boundRect[i] = boundingRect( Mat(contours_poly[i]) );
-        //minEnclosingCircle( (Mat)contours_poly[i], center[i], radius[i] );
+        minEnclosingCircle( (Mat)contours_poly[i], center[i], radius[i] );
         if (boundRect[i].area() < minRectSize) {
             contours.erase(contours.begin() + i);
             contours_poly.erase(contours_poly.begin() + i);
@@ -185,7 +185,7 @@ public:
     //if (cv_ptr->image.rows > 60 && cv_ptr->image.cols > 60)
       //cv::circle(cv_ptr->image, cv::Point(50, 50), 10, CV_RGB(255,0,0));
 
-    imshow(WINDOW, src); //cv_ptr->image);
+    imshow(WINDOW, src);
     imshow(CANNY_WINDOW, canny_output);
     imshow(THRESHOLD_WINDOW, threshedMat);
     waitKey(3);
