@@ -27,6 +27,8 @@ class ImageConverter
   int threshCanny;
   int threshVal;
   int max_thresh;
+  int minRectSize;
+  int maxRectSize;
   RNG rng;
   
 public:
@@ -39,6 +41,8 @@ public:
     threshCanny = 255;
     threshVal = 125;
     max_thresh = 255;
+    minRectSize = 0;
+    maxRectSize = 4096;
     rng = RNG(12345);
 
     namedWindow(WINDOW);
@@ -47,6 +51,7 @@ public:
     
     createTrackbar( " Canny thresh:", CANNY_WINDOW, &threshCanny, max_thresh, thresh_callback );
     createTrackbar( " Thresholding:", THRESHOLD_WINDOW, &threshVal, max_thresh, thresh_callback );
+    createTrackbar( " Min Rect Size:", WINDOW, &minRectSize, maxRectSize, thresh_callback );
   }
 
   ~ImageConverter()
@@ -155,14 +160,21 @@ public:
     for( int i = 0; i < contours.size(); i++ ) { 
         approxPolyDP( Mat(contours[i]), contours_poly[i], 3, true );
         boundRect[i] = boundingRect( Mat(contours_poly[i]) );
-        minEnclosingCircle( (Mat)contours_poly[i], center[i], radius[i] );
+        //minEnclosingCircle( (Mat)contours_poly[i], center[i], radius[i] );
+        if (boundRect[i].area() < minRectSize) {
+            contours.erase(contours.begin() + i);
+            contours_poly.erase(contours_poly.begin() + i);
+            boundRect.erase(boundRect.begin() + i);
+            center.erase(center.begin() + i);
+            radius.erase(radius.begin() + i);
+            i--;
+        }
     }
 
     /// Draw contours
     //Mat drawing = Mat::zeros( canny_output.size(), CV_8UC3 );
     for( size_t i = 0; i< contours.size(); i++ ) {
         Scalar color = Scalar(0, 0, 255);//( rng.uniform(0, 255), rng.uniform(0,255), rng.uniform(0,255) );
-        //drawContours( drawing, contours, (int)i, color, 2, 8, hierarchy, 0, Point() );
         drawContours( src, contours_poly, i, color, 1, 8, vector<Vec4i>(), 0, Point() );
         rectangle( src, boundRect[i].tl(), boundRect[i].br(), color, 2, 8, 0 );
         circle( src, center[i], 1, color, 2, 8, 0 );
