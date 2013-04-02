@@ -21,6 +21,9 @@
   <depend package="roscpp"/>
   <depend package="ee_cart_imped_action" />
   <depend package="ee_cart_imped_msgs" />
+  <depend package="pcl"/>
+  <depend package="pcl_ros"/>
+
   
 </package>
 
