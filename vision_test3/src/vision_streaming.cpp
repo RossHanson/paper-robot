@@ -32,6 +32,8 @@ class ImageConverter
   RNG rng;
   Mat src;
   
+  //public: static ImageConverter instance;// = 0;
+  
   public: ImageConverter(bool isStaticImage, char* staticImage) : it_(nh_)
   {
     ROS_INFO("===========Entered constructor===========");
@@ -39,16 +41,16 @@ class ImageConverter
     threshVal = 117;
     max_thresh = 255;
     minRectSize = 1200;
-    maxRectSize = 4096;
+    maxRectSize = 50000;
     rng = RNG(12345);
 
     namedWindow(WINDOW);
     namedWindow(CANNY_WINDOW);
     namedWindow(THRESHOLD_WINDOW);
     
-    createTrackbar( " Canny thresh:", CANNY_WINDOW, &threshCanny, max_thresh, thresh_callback );
-    createTrackbar( " Thresholding:", THRESHOLD_WINDOW, &threshVal, max_thresh, thresh_callback );
-    createTrackbar( " Min Rect Size:", WINDOW, &minRectSize, maxRectSize, thresh_callback );
+    createTrackbar( " Canny thresh:", CANNY_WINDOW, &threshCanny, max_thresh, &processImageCallback, this );
+    createTrackbar( " Thresholding:", THRESHOLD_WINDOW, &threshVal, max_thresh, &processImageCallback, this );
+    createTrackbar( " Min Rect Size:", WINDOW, &minRectSize, maxRectSize, &processImageCallback, this );
     
     ROS_INFO("Initialization finished.");
     //image_pub_ = it_.advertise("out", 1);
@@ -59,11 +61,9 @@ class ImageConverter
     else {
         ROS_INFO("Static image found.");
         ROS_INFO(staticImage);
-        //Mat src = imread(staticImage, 1 );
-        //imshow("test", imread(staticImage, 1 );
         src = imread(staticImage, 1 );
-        waitKey(20);
-        processImage(0, 0);
+        processImageCallback(0, this);
+        waitKey(0);
     }
   }
 
@@ -72,22 +72,34 @@ class ImageConverter
     cv::destroyWindow(WINDOW);
   }
   
-  void processImage(int, void*) {
+  static void processImageCallback(int arg, void* context) {
+    //((ImageConverter*)context)->processImage();
+    ImageConverter* self = static_cast<ImageConverter*>(context);
+    self->processImage();
+  }
+  
+  /*static void processImageCallback(int other_arg, void * this_pointer) {
+    ImageConverter * self = static_cast<ImageConverter*>(this_pointer);
+    self->processImage();
+  }*/
+  
+  void processImage() {
     //break into color spaces for comparison
     //rgb
+    Mat image = src.clone();
     vector<Mat> rgb;
-    split(src, rgb);  
+    split(image, rgb);  
 
     //luv
     Mat luvMat;
     vector<Mat> luv;
-    cvtColor( src, luvMat, CV_BGR2Luv );
+    cvtColor( image, luvMat, CV_BGR2Luv );
     split(luvMat, luv);
 
     //hsv
     Mat hsvMat;
     vector<Mat> hsv;
-    cvtColor( src, hsvMat, CV_BGR2HSV );
+    cvtColor( image, hsvMat, CV_BGR2HSV );
     split(hsvMat, hsv);
 
     //blur the channels
@@ -126,7 +138,7 @@ class ImageConverter
     imshow( "hV", hsv[0] );*/
 
     /// Convert image to gray and blur it
-    //cvtColor( src, src_gray, CV_BGR2GRAY );
+    //cvtColor( image, src_gray, CV_BGR2GRAY );
     //blur( src_gray, src_gray, Size(3,3) );
     
     //set image to be processed
@@ -172,19 +184,19 @@ class ImageConverter
     //Mat drawing = Mat::zeros( canny_output.size(), CV_8UC3 );
     for( size_t i = 0; i< contours.size(); i++ ) {
         Scalar color = Scalar(0, 0, 255);//( rng.uniform(0, 255), rng.uniform(0,255), rng.uniform(0,255) );
-        drawContours( src, contours_poly, i, color, 1, 8, vector<Vec4i>(), 0, Point() );
-        rectangle( src, boundRect[i].tl(), boundRect[i].br(), color, 2, 8, 0 );
-        circle( src, center[i], 1, color, 2, 8, 0 );
+        drawContours( image, contours_poly, i, color, 1, 8, vector<Vec4i>(), 0, Point() );
+        rectangle( image, boundRect[i].tl(), boundRect[i].br(), color, 2, 8, 0 );
+        circle( image, center[i], 1, color, 2, 8, 0 );
         //circle( drawing, center[i], (int)radius[i], color, 2, 8, 0 );
     }
     
-    waitKey(50);
-    imshow(WINDOW, src);
-    waitKey(50);
+    waitKey(70);
+    imshow(WINDOW, image);
+    waitKey(70);
     imshow(CANNY_WINDOW, canny_output);
-    waitKey(50);
+    waitKey(70);
     imshow(THRESHOLD_WINDOW, threshedMat);
-    waitKey(50);
+    waitKey(70);
     
     //image_pub_.publish(cv_ptr->toImageMsg());
   }
@@ -206,7 +218,7 @@ class ImageConverter
     //store the new Mat image inside of a Mat object for easy access
     src = cv_ptr->image;
     
-    processImage(0, 0);
+    processImage();
   }
 };
 
@@ -218,6 +230,7 @@ int main(int argc, char** argv)
 {
   ROS_INFO("===========Entered main===========");
   ros::init(argc, argv, "image_converter");
+  //ImageConverter ImageConverter::instance = ImageConverter(argc > 1, argv[1]);
   ImageConverter ic(argc > 1, argv[1]);
   ros::spin();
   return 0;
