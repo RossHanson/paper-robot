@@ -30,14 +30,11 @@ class ImageConverter
   int minRectSize;
   int maxRectSize;
   RNG rng;
+  Mat src;
   
-public:
-  ImageConverter()
-    : it_(nh_)
+  public: ImageConverter(bool isStaticImage, char* staticImage) : it_(nh_)
   {
-    //image_pub_ = it_.advertise("out", 1);
-    image_sub_ = it_.subscribe("/wide_stereo/left/image_rect_color", 1, &ImageConverter::imageCb, this);
-
+    ROS_INFO("===========Entered constructor===========");
     threshCanny = 255;
     threshVal = 117;
     max_thresh = 255;
@@ -52,30 +49,30 @@ public:
     createTrackbar( " Canny thresh:", CANNY_WINDOW, &threshCanny, max_thresh, thresh_callback );
     createTrackbar( " Thresholding:", THRESHOLD_WINDOW, &threshVal, max_thresh, thresh_callback );
     createTrackbar( " Min Rect Size:", WINDOW, &minRectSize, maxRectSize, thresh_callback );
+    
+    ROS_INFO("Initialization finished.");
+    //image_pub_ = it_.advertise("out", 1);
+    if (!isStaticImage) {//staticImage[0] == '\0') {
+        ROS_INFO("No static image - stream from camera.");
+        image_sub_ = it_.subscribe("/wide_stereo/left/image_rect_color", 1, &ImageConverter::imageCb, this);
+    }
+    else {
+        ROS_INFO("Static image found.");
+        ROS_INFO(staticImage);
+        //Mat src = imread(staticImage, 1 );
+        //imshow("test", imread(staticImage, 1 );
+        src = imread(staticImage, 1 );
+        waitKey(20);
+        processImage(0, 0);
+    }
   }
 
   ~ImageConverter()
   {
     cv::destroyWindow(WINDOW);
   }
-
-  void imageCb(const sensor_msgs::ImageConstPtr& msg)
-  {
-    //covert the rosimage into an openCV Mat image
-    cv_bridge::CvImagePtr cv_ptr;
-    try
-    {
-      cv_ptr = cv_bridge::toCvCopy(msg, enc::BGR8);
-    }
-    catch (cv_bridge::Exception& e)
-    {
-      ROS_ERROR("cv_bridge exception: %s", e.what());
-      return;
-    }
-    
-    //store the new Mat image inside of a Mat object for easy access
-    Mat src = cv_ptr->image;
-    
+  
+  void processImage(int, void*) {
     //break into color spaces for comparison
     //rgb
     vector<Mat> rgb;
@@ -181,16 +178,35 @@ public:
         //circle( drawing, center[i], (int)radius[i], color, 2, 8, 0 );
     }
     
-    //draws a small circle on the image to signify it has been converted to openCV Mat format
-    //if (cv_ptr->image.rows > 60 && cv_ptr->image.cols > 60)
-      //cv::circle(cv_ptr->image, cv::Point(50, 50), 10, CV_RGB(255,0,0));
-
+    waitKey(50);
     imshow(WINDOW, src);
+    waitKey(50);
     imshow(CANNY_WINDOW, canny_output);
+    waitKey(50);
     imshow(THRESHOLD_WINDOW, threshedMat);
-    waitKey(3);
+    waitKey(50);
     
     //image_pub_.publish(cv_ptr->toImageMsg());
+  }
+
+  void imageCb(const sensor_msgs::ImageConstPtr& msg)
+  {
+    //covert the rosimage into an openCV Mat image
+    cv_bridge::CvImagePtr cv_ptr;
+    try
+    {
+      cv_ptr = cv_bridge::toCvCopy(msg, enc::BGR8);
+    }
+    catch (cv_bridge::Exception& e)
+    {
+      ROS_ERROR("cv_bridge exception: %s", e.what());
+      return;
+    }
+    
+    //store the new Mat image inside of a Mat object for easy access
+    src = cv_ptr->image;
+    
+    processImage(0, 0);
   }
 };
 
@@ -200,9 +216,9 @@ void thresh_callback(int, void* )
 
 int main(int argc, char** argv)
 {
-  ROS_INFO("===========Entered main===========\n");
+  ROS_INFO("===========Entered main===========");
   ros::init(argc, argv, "image_converter");
-  ImageConverter ic;
+  ImageConverter ic(argc > 1, argv[1]);
   ros::spin();
   return 0;
 }
