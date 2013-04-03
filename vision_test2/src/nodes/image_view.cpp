@@ -3,9 +3,9 @@
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "image_view", ros::init_options::AnonymousName);
+  ros::init(argc, argv, "vision_test2", ros::init_options::AnonymousName);
   
-  printf("===============entered the main function====================\n");
+  printf("========entered the main function of image_view.cpp in nodes==============\n");
   
   if (ros::names::remap("image") == "image") {
     ROS_WARN("Topic 'image' has not been remapped! Typical command-line usage:\n"
@@ -17,7 +17,7 @@ int main(int argc, char **argv)
   nodelet::V_string my_argv(argv + 1, argv + argc);
   my_argv.push_back("--shutdown-on-close"); // Internal
 
-  manager.load(ros::this_node::getName(), "image_view/image", remappings, my_argv);
+  manager.load(ros::this_node::getName(), "vision_test2/image", remappings, my_argv);
 
   ros::spin();
   return 0;

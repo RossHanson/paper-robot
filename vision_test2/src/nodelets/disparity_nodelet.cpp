@@ -85,6 +85,7 @@ void DisparityNodelet::onInit()
 
 void DisparityNodelet::imageCb(const stereo_msgs::DisparityImageConstPtr& msg)
 {
+  printf("===========entered imageCb in disparity_nodelett.cpp================\n");
   // Check for common errors in input
   if (msg->min_disparity == 0.0 && msg->max_disparity == 0.0)
   {
