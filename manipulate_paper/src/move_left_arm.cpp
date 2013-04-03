@@ -94,9 +94,9 @@ int main1(int argc, char** argv){
   desired_pose.pose.orientation.z = 0.0;
   desired_pose.pose.orientation.w = 1.0;
 
-  desired_pose.absolute_position_tolerance.x = 0.005;
-  desired_pose.absolute_position_tolerance.y = 0.005;
-  desired_pose.absolute_position_tolerance.z = 0.005;
+  desired_pose.absolute_position_tolerance.x = 0.02;
+  desired_pose.absolute_position_tolerance.y = 0.02;
+  desired_pose.absolute_position_tolerance.z = 0.02;
 
   desired_pose.absolute_roll_tolerance = 0.04;
   desired_pose.absolute_pitch_tolerance = 0.04;
@@ -153,3 +153,4 @@ int main(int argc, char **argv){
 
   ros::shutdown();
 }
+
