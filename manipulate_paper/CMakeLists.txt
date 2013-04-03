@@ -22,7 +22,7 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #rosbuild_gensrv()
 
 #common commands for building c++ executables and libraries
-#rosbuild_add_library(${PROJECT_NAME} src/movements.cpp)
+rosbuild_add_library(${PROJECT_NAME} src/movements.cpp)
 #target_link_libraries(${PROJECT_NAME} another_library)
 #rosbuild_add_boost_directories()
 #rosbuild_link_boost(${PROJECT_NAME} thread signals)
@@ -39,3 +39,4 @@ rosbuild_add_executable(move_left src/move_left_arm.cpp)
 rosbuild_add_executable(test_force src/testForce.cpp)
 rosbuild_add_executable(listen_server src/move_server.cpp)
 rosbuild_add_executable(seg_table src/segment_table.cpp)
+target_link_libraries(seg_table ${PROJECT_NAME})
