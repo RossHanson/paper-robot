@@ -81,11 +81,11 @@ void Movements::move_gripper(ros::NodeHandle *nh, bool isLeft, double des_x, dou
     {
     group_name="left_arm";
     client_name = "move_left_arm";
-    link_name = "l_wrist_roll_link";
+    link_name = "l_gripper_r_finger_tip_link";
     } else {
     group_name="right_arm";
     client_name="move_right_arm";
-    link_name = "r_wrist_roll_link";
+    link_name = "r_gripper_r_finger_tip_link";
   }
   actionlib::SimpleActionClient<arm_navigation_msgs::MoveArmAction> move_arm(client_name,true);
   move_arm.waitForServer();

@@ -27,7 +27,7 @@ ros::Publisher pub;
 ros::Publisher marker_pub;
 ros::Subscriber sub;
 ros::NodeHandle* nh;
-std::string target_id = "/base_footprint";
+std::string target_id = "/torso_lift_link";
 
 using namespace std;
 
@@ -95,10 +95,10 @@ void add_rviz_marker(pcl::PointXYZ point_to_mark, pcl::PointXYZ point_to_line, s
 
 
 void perform_arm_motion(float table_edge_x, float table_edge_z){
-  float x_offset = 0.01;
+  float x_offset = 0.05;
   float z_offset = 0.05;
   cerr << "Shooting for: " << (table_edge_x - x_offset) << " and " << (table_edge_z - z_offset);
-  Movements::move_left_gripper(nh,table_edge_x-x_offset, 0.0, table_edge_z-z_offset);
+  Movements::move_left_gripper(nh,table_edge_x - x_offset,0.0, 0.0);
   
   
 }
