@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ros/ros.h>
 #include <sensor_msgs/PointCloud2.h>
+#include <std_msgs/String.h>
 #include <stdio.h>
 // PCL specific includes
 #include <pcl/io/pcd_io.h>
@@ -25,6 +26,7 @@
 
 ros::Publisher pub;
 ros::Publisher marker_pub;
+ros::Publisher move_pub;
 ros::Subscriber sub;
 ros::NodeHandle* nh;
 std::string target_id = "/torso_lift_link";
@@ -95,11 +97,18 @@ void add_rviz_marker(pcl::PointXYZ point_to_mark, pcl::PointXYZ point_to_line, s
 
 
 void perform_arm_motion(float table_edge_x, float table_edge_z){
-  float x_offset = 0.05;
+  float x_offset = 0.065;
   float z_offset = 0.05;
-  cerr << "Shooting for: " << (table_edge_x - x_offset) << " and " << (table_edge_z - z_offset);
-  Movements::move_left_gripper(nh,table_edge_x - x_offset,0.0, 0.0);
-  
+    cerr << "Shooting for: " << (table_edge_x - x_offset) << " and " << (table_edge_z - z_offset) <<endl;
+    
+    cerr << "Offset: " << x_offset;
+    stringstream args;
+    args <<"move_to_table_edge " << table_edge_x << " " << table_edge_z;
+    std_msgs::String str;
+    str.data = args.str();
+    move_pub.publish(str);
+    //Movements::imped_left_arm_move(target_id,table_edge_x - x_offset,0.0, table_edge_z - z_offset,0.1,0.0,-1.0);
+    x_offset = x_offset + .01;
   
 }
 
@@ -157,10 +166,7 @@ extract.setNegative(false);
 extract.filter(*cloud_p);
 std:cerr << "Model coefficients: " << coefficients->values[0] << " " << coefficients->values[1] << " " << coefficients->values[2] << " " << coefficients->values[3] << " | Size: "
 << cloud_p->width * cloud_p->height << "data points" << std::endl;
-std::stringstream ss;
-ss << "table_scene_lms_" << i << ".pcd";
-writer.write<pcl::PointXYZ> (ss.str (), *cloud_p, false);
- if (coefficients->values[3]<best_val){
+ if (coefficients->values[3]<best_val && cloud_p->width>10000){
    best_val = coefficients->values[3];
 best_out = *cloud_p;
 }
@@ -200,12 +206,14 @@ main (int argc, char** argv)
   // Initialize ROS
   ros::init (argc, argv, "my_pcl_tutorial");
   nh = new ros::NodeHandle;
-
+  Movements::imped_reset_left_arm();
+  Movements::imped_reset_right_arm();
   // Create a ROS subscriber for the input point cloud
 sub  = nh->subscribe ("input", 1, cloud_cb);
   // Create a ROS publisher for the output point cloud
   pub = nh->advertise<sensor_msgs::PointCloud2> ("output", 1);
   marker_pub = nh->advertise<visualization_msgs::Marker>("visualization_marker", 1);
+  move_pub = nh ->advertise<std_msgs::String>("force_control_commands",1);
   // Spin
   ros::spin ();
 }
