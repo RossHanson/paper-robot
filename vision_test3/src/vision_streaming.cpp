@@ -5,6 +5,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <cv.h>
+#include <stdlib.h>
 
 using namespace cv;
 
@@ -116,21 +117,21 @@ class ImageConverter
     blur( hsv[2], hsv[2], Size(3,3) );
 
     //output
-    /*namedWindow( "Red", CV_WINDOW_AUTOSIZE );
+    namedWindow( "Red", CV_WINDOW_AUTOSIZE );
     imshow( "Red", rgb[2] );
-    namedWindow( "Blue", CV_WINDOW_AUTOSIZE );
+    /*namedWindow( "Blue", CV_WINDOW_AUTOSIZE );
     imshow( "Blue", rgb[1] );
     namedWindow( "Green", CV_WINDOW_AUTOSIZE );
-    imshow( "Green", rgb[0] );*/
+    imshow( "Green", rgb[0] );
 
-    /*namedWindow( "L", CV_WINDOW_AUTOSIZE );
+    namedWindow( "L", CV_WINDOW_AUTOSIZE );
     imshow( "L", luv[2] );
     namedWindow( "U", CV_WINDOW_AUTOSIZE );
-    imshow( "U", luv[1] );*/
+    imshow( "U", luv[1] );
     namedWindow( "lV", CV_WINDOW_AUTOSIZE );
     imshow( "lV", luv[0] );
 
-    /*namedWindow( "H", CV_WINDOW_AUTOSIZE );
+    namedWindow( "H", CV_WINDOW_AUTOSIZE );
     imshow( "H", hsv[2] );
     namedWindow( "S", CV_WINDOW_AUTOSIZE );
     imshow( "S", hsv[1] );
@@ -142,7 +143,7 @@ class ImageConverter
     //blur( src_gray, src_gray, Size(3,3) );
     
     //set image to be processed
-    outputMat = luv[0];
+    outputMat = rgb[2];
     
     //begin processing the image
     Mat canny_output;
@@ -182,12 +183,28 @@ class ImageConverter
 
     /// Draw contours
     //Mat drawing = Mat::zeros( canny_output.size(), CV_8UC3 );
-    for( size_t i = 0; i< contours.size(); i++ ) {
+    for( int i = 0; i < contours.size(); i++ ) {
         Scalar color = Scalar(0, 0, 255);//( rng.uniform(0, 255), rng.uniform(0,255), rng.uniform(0,255) );
         drawContours( image, contours_poly, i, color, 1, 8, vector<Vec4i>(), 0, Point() );
         rectangle( image, boundRect[i].tl(), boundRect[i].br(), color, 2, 8, 0 );
         circle( image, center[i], 1, color, 2, 8, 0 );
         //circle( drawing, center[i], (int)radius[i], color, 2, 8, 0 );
+    }
+    
+    //select the largest Rect from those that remain
+    int largestRect = 0;
+    for (int i = 0; i < boundRect.size(); i++) {
+        if (boundRect[i].area() > boundRect[largestRect].area()) {
+            largestRect = i;
+        }
+    }
+    if (boundRect.size() > 0) {
+        //TODO: return that rect
+        //NOTE: there is a known g++ error that does not let you use the to_string() function in std.  
+        //there are patches, but i have not fully looked into them.  
+        // http://stackoverflow.com/questions/12975341/to-string-is-not-a-member-of-std-says-so-g
+        //ROS_INFO(std::to_string(boundRect[largestRect].area())); 
+        printf("The area of the paper is:  %i\n", boundRect[largestRect].area());
     }
     
     waitKey(70);
