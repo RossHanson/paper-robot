@@ -204,16 +204,17 @@ class ImageConverter
         //there are patches, but i have not fully looked into them.  
         // http://stackoverflow.com/questions/12975341/to-string-is-not-a-member-of-std-says-so-g
         //ROS_INFO(std::to_string(boundRect[largestRect].area())); 
-        printf("The area of the paper is:  %i\n", boundRect[largestRect].area());
+        
+        //printf("The area of the paper is:  %i\n", boundRect[largestRect].area());
     }
     
-    waitKey(70);
+    waitKey(5);
     imshow(WINDOW, image);
-    waitKey(70);
+    waitKey(5);
     imshow(CANNY_WINDOW, canny_output);
-    waitKey(70);
+    waitKey(5);
     imshow(THRESHOLD_WINDOW, threshedMat);
-    waitKey(70);
+    waitKey(5);
     
     //image_pub_.publish(cv_ptr->toImageMsg());
   }
