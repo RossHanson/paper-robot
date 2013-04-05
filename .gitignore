@@ -2,7 +2,10 @@
 manipulate_paper/bin/
 manipulate_paper/bin-debug/
 manipulate_paper/bin-release/
-
+*~
+manipulate_paper/scripts/gazeboOut.txt
+manipulate_paper/scripts/gazeboOut.out
+manipulate_paper/scripts/gazeboIn.txt
 
 # Other files and folders
 .settings/

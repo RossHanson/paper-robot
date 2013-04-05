@@ -243,3 +243,5 @@ object_manipulation_msgs::Grasp setupPreGrasp(){
   
   return grasp;
 }
+
+
