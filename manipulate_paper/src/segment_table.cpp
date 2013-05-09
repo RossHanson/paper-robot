@@ -153,16 +153,22 @@ float best_val = 100;
 int i = 0, nr_points = (int) cloud_filtered->points.size();
 while (cloud_filtered->points.size() > .04 * nr_points && i<10)
   {
+    std::cout<< "Line 1" << std::endl;
 seg.setInputCloud(cloud_filtered);
-seg.segment(*inliers, *coefficients);
-if (inliers->indices.size() == 0)
+    std::cout<< "Line 2" << std::endl;
+ seg.segment(*inliers, *coefficients);
+    std::cout<< "Line 3" << std::endl;
+ if (inliers->indices.size() == 0)
   {std::cerr << "Could not estimate a planar model for the given data set" << std::endl;
 break;
 }
-
+    std::cout<< "Line 4" << std::endl;
 extract.setInputCloud(cloud_filtered);
-extract.setIndices(inliers);
+    std::cout<< "Line 5" << std::endl;
+ extract.setIndices(inliers);
+     std::cout<< "Line 6" << std::endl;
 extract.setNegative(false);
+     std::cout<< "Line 7" << std::endl;
 extract.filter(*cloud_p);
 std:cerr << "Model coefficients: " << coefficients->values[0] << " " << coefficients->values[1] << " " << coefficients->values[2] << " " << coefficients->values[3] << " | Size: "
 << cloud_p->width * cloud_p->height << "data points" << std::endl;
