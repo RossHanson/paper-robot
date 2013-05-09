@@ -37,7 +37,7 @@ bool cmp(const pcl::PointXYZ &point1, const pcl::PointXYZ &point2){
 return point1.x < point2.x;
 }
 
-void add_rviz_marker(pcl::PointXYZ point_to_mark, pcl::PointXYZ point_to_line, string frame_id){
+void add_rviz_marker(double x, double left_y, double right_y, double z, string frame_id){
   ros::Rate r(1);
 
 
@@ -64,24 +64,24 @@ void add_rviz_marker(pcl::PointXYZ point_to_mark, pcl::PointXYZ point_to_line, s
     marker.action = line.action = visualization_msgs::Marker::ADD;
     geometry_msgs::Point point1;
     geometry_msgs::Point point2;
-    point1.x = point_to_mark.x; point2.x = point_to_line.x;
-    point1.y = point_to_mark.y; point2.y = point_to_line.y;
-    point1.z = point_to_mark.z; point2.z = point_to_line.z;
+    point1.z = point2.z = z;
+    point1.x = point2.x = x;
+    point1.y = left_y; point2.y = right_y;
     line.points.push_back(point1);
     line.points.push_back(point2);
     // Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
-    marker.pose.position.x = point_to_mark.x;
-    marker.pose.position.y = point_to_mark.y;
-    marker.pose.position.z = point_to_mark.z;
+    marker.pose.position.x = x;
+    marker.pose.position.y = 0.0;
+    marker.pose.position.z = z;
     line.pose.orientation.x = marker.pose.orientation.x = 0.0;
     line.pose.orientation.y = marker.pose.orientation.y = 0.0;
     line.pose.orientation.z = marker.pose.orientation.z = 0.0;
     line.pose.orientation.w = marker.pose.orientation.w = 1.0;
 
     // Set the scale of the marker -- 1x1x1 here means 1m on a side
-    marker.scale.x = .2;
-    marker.scale.y = .2;
-    marker.scale.z = .2;
+    marker.scale.x = .05;
+    marker.scale.y = .05;
+    marker.scale.z = .05;
 
     // Set the color -- be sure to set alpha to something non-zero!
     marker.color.r = 0.0f; line.color.r = 1.0f;
@@ -99,14 +99,13 @@ void add_rviz_marker(pcl::PointXYZ point_to_mark, pcl::PointXYZ point_to_line, s
 void perform_arm_motion(float table_edge_x, float table_edge_z){
   float x_offset = 0.065;
   float z_offset = 0.05;
-    cerr << "Shooting for: " << (table_edge_x - x_offset) << " and " << (table_edge_z - z_offset) <<endl;
+    cerr << "Shooting for: " << table_edge_x << " and " << table_edge_z <<endl;
     
     cerr << "Offset: " << x_offset;
     stringstream args;
     args <<"move_to_table_edge " << table_edge_x << " " << table_edge_z;
     std_msgs::String str;
     str.data = args.str();
-    move_pub.publish(str);
     //Movements::imped_left_arm_move(target_id,table_edge_x - x_offset,0.0, table_edge_z - z_offset,0.1,0.0,-1.0);
     x_offset = x_offset + .01;
   
@@ -115,7 +114,7 @@ void perform_arm_motion(float table_edge_x, float table_edge_z){
 void 
 cloud_cb (const sensor_msgs::PointCloud2ConstPtr& cloud)
 {
-  cerr << "Frame id " <<cloud->header.frame_id;
+    cerr << "Frame id " <<cloud->header.frame_id << endl;
 sensor_msgs::PointCloud2 cloud_filtered_blob, out_blob, tmp_out_blob;
 pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZ>), cloud_p (new pcl::PointCloud<pcl::PointXYZ>), cloud_f (new pcl::PointCloud<pcl::PointXYZ>);
 pcl::PointCloud<pcl::PointXYZ> best_out;
@@ -151,26 +150,32 @@ pcl::ExtractIndices<pcl::PointXYZ> extract;
 float best_val = 100;
 
 int i = 0, nr_points = (int) cloud_filtered->points.size();
-while (cloud_filtered->points.size() > .04 * nr_points && i<10)
+while (cloud_filtered->points.size() > .01 * nr_points && i<10)
   {
+    std::cout << "Looking at cloud " << std::endl;
 seg.setInputCloud(cloud_filtered);
 seg.segment(*inliers, *coefficients);
 if (inliers->indices.size() == 0)
   {std::cerr << "Could not estimate a planar model for the given data set" << std::endl;
 break;
 }
-
+ std::cout << "About to filter stuff out" << std::endl;
 extract.setInputCloud(cloud_filtered);
 extract.setIndices(inliers);
 extract.setNegative(false);
 extract.filter(*cloud_p);
-std:cerr << "Model coefficients: " << coefficients->values[0] << " " << coefficients->values[1] << " " << coefficients->values[2] << " " << coefficients->values[3] << " | Size: "
+ std::cout << "Model coefficients: " << coefficients->values[0] << " " << coefficients->values[1] << " " << coefficients->values[2] << " " << coefficients->values[3] << " | Size: "
 << cloud_p->width * cloud_p->height << "data points" << std::endl;
- if (coefficients->values[3]<best_val && cloud_p->width>10000){
+ if (coefficients->values[2]>0.9&&coefficients->values[3]<best_val && cloud_p->width>10000){
    best_val = coefficients->values[3];
-best_out = *cloud_p;
+   std::cout << "Updated best " << std::endl;
+   best_out = *cloud_p;
 }
-extract.setNegative(true);
+ std::cout << "Made it past loop" << std::endl;
+ pcl::toROSMsg(*cloud_p,tmp_out_blob); 
+pub.publish(tmp_out_blob);
+ros::Duration(3.0).sleep();
+ extract.setNegative(true);
 extract.filter(*cloud_f);
 cloud_filtered.swap(cloud_f);
 i++;
@@ -186,13 +191,28 @@ sor.setInputCloud (tmp_out_blob_ptr);
   sor.setLeafSize (0.01, 0.01, 0.01);
   sor.filter (out_blob);
 std::cerr << " Downsampled model width: " << out_blob.width << " and height " << out_blob.height << std::endl;
+
 pub.publish(out_blob);
 
 pcl::fromROSMsg(out_blob,best_out);
 std::sort(best_out.begin(),best_out.end(),cmp);
 std::cerr << "Lowest x position: " << best_out.points[0].x << std::endl;
+double threshold = best_out.points[0].x + .005;
+double left_bound=0.0;
+double right_bound=0.0;
+double z_ave = 0.0;
+pcl::PointCloud<pcl::PointXYZ>::VectorType::iterator point_it = best_out.begin();
+double count = 0;
+while((point_it!=best_out.end())&&point_it->x<threshold){
+    right_bound = std::min(right_bound,double(point_it->y));
+    left_bound = std::max(left_bound,double(point_it->y));
+    z_ave += double(point_it->z);
+    point_it++;
+    count++;
+}
+z_ave = z_ave / count;
 
- add_rviz_marker(best_out.points[0], best_out.points[100],target_id);
+add_rviz_marker(best_out.points[0].x,left_bound,right_bound,z_ave,target_id);
 ROS_INFO("FINISHED RUNNING");
  perform_arm_motion(best_out.points[0].x,best_out.points[0].z);
 sub.shutdown();

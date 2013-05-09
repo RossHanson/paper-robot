@@ -24,6 +24,7 @@
   <depend package="ee_cart_imped_control"/>
   <depend package="geometry_msgs" />
   <depend package="actionlib" />
+  <depend package="pr2_pick_and_place_demos" />
   <depend package="pcl"/>
   <depend package="pcl_ros"/>
   <depend package="visualization_msgs" />

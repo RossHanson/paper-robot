@@ -85,8 +85,8 @@ int main(int argc, char** argv)
   ros::NodeHandle nh("~");
 
   std::string x = "1.0";
-  std::string y = "0.0";
-  std::string z = "0.6";
+  std::string y = "-0.1";
+  std::string z = "0.15";
   
   //cout << x << " " << y << " " << z;
 

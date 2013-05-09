@@ -1,0 +1,745 @@
+... logging to /home/ross/.ros/log/a5059434-853c-11e2-8a26-001e644d5dd4/roslaunch-abu-11938.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+]2;/opt/ros/fuerte/stacks/pr2_object_manipulation/applications/pr2_tabletop_manipulation_launch/launch/pr2_tabletop_manipulation.launch
+[1mstarted roslaunch server http://abu:52813/[0m
+
+SUMMARY
+========
+
+PARAMETERS
+ * /arm_configurations/above/position/left_arm
+ * /arm_configurations/above/position/right_arm
+ * /arm_configurations/above/trajectory/left_arm
+ * /arm_configurations/above/trajectory/right_arm
+ * /arm_configurations/front/position/left_arm
+ * /arm_configurations/front/position/right_arm
+ * /arm_configurations/front/trajectory/left_arm
+ * /arm_configurations/front/trajectory/right_arm
+ * /arm_configurations/side/position/left_arm
+ * /arm_configurations/side/position/right_arm
+ * /arm_configurations/side/trajectory/left_arm
+ * /arm_configurations/side/trajectory/right_arm
+ * /cluster_bounding_box_finder/z_up_frame
+ * /collider_node/camera_info_topic
+ * /collider_node/camera_stereo_offset_left
+ * /collider_node/camera_stereo_offset_right
+ * /collider_node/cloud_sources
+ * /collider_node/fixed_frame
+ * /collider_node/max_range
+ * /collider_node/min_sensor_dist
+ * /collider_node/publish_static_over_dynamic_map
+ * /collider_node/resolution
+ * /collider_node/self_see_default_padding
+ * /collider_node/self_see_default_scale
+ * /collider_node/self_see_links
+ * /collider_node/sensor_model_hit
+ * /collider_node/sensor_model_max
+ * /collider_node/sensor_model_min
+ * /collider_node/sensor_model_miss
+ * /dynparam_abu_11938_827841829024132987/intensity
+ * /dynparam_abu_11938_827841829024132987/max_ang
+ * /dynparam_abu_11938_827841829024132987/min_ang
+ * /environment_server/use_collision_map
+ * /environment_server/use_monitor
+ * /hand_description/left_arm/arm_group_name
+ * /hand_description/left_arm/arm_joints
+ * /hand_description/left_arm/attach_link
+ * /hand_description/left_arm/attached_objects_name
+ * /hand_description/left_arm/hand_approach_direction
+ * /hand_description/left_arm/hand_database_name
+ * /hand_description/left_arm/hand_fingertip_links
+ * /hand_description/left_arm/hand_frame
+ * /hand_description/left_arm/hand_group_name
+ * /hand_description/left_arm/hand_joints
+ * /hand_description/left_arm/hand_touch_links
+ * /hand_description/left_arm/robot_frame
+ * /hand_description/right_arm/arm_group_name
+ * /hand_description/right_arm/arm_joints
+ * /hand_description/right_arm/attach_link
+ * /hand_description/right_arm/attached_objects_name
+ * /hand_description/right_arm/hand_approach_direction
+ * /hand_description/right_arm/hand_database_name
+ * /hand_description/right_arm/hand_fingertip_links
+ * /hand_description/right_arm/hand_frame
+ * /hand_description/right_arm/hand_group_name
+ * /hand_description/right_arm/hand_joints
+ * /hand_description/right_arm/hand_touch_links
+ * /hand_description/right_arm/robot_frame
+ * /head_monitor/do_monitoring
+ * /head_monitor/do_preplan_scan
+ * /head_monitor/use_left_arm
+ * /head_monitor/use_right_arm
+ * /household_objects_database/database_host
+ * /household_objects_database/database_name
+ * /household_objects_database/database_pass
+ * /household_objects_database/database_port
+ * /household_objects_database/database_user
+ * /l_cart/cart_gains/rot/d
+ * /l_cart/cart_gains/rot/p
+ * /l_cart/cart_gains/trans/d
+ * /l_cart/cart_gains/trans/p
+ * /l_cart/jacobian_inverse_damping
+ * /l_cart/joint_feedforward/l_elbow_flex_joint
+ * /l_cart/joint_feedforward/l_forearm_roll_joint
+ * /l_cart/joint_feedforward/l_shoulder_lift_joint
+ * /l_cart/joint_feedforward/l_shoulder_pan_joint
+ * /l_cart/joint_feedforward/l_upper_arm_roll_joint
+ * /l_cart/joint_feedforward/l_wrist_flex_joint
+ * /l_cart/joint_feedforward/l_wrist_roll_joint
+ * /l_cart/joint_max_effort/l_elbow_flex_joint
+ * /l_cart/joint_max_effort/l_forearm_roll_joint
+ * /l_cart/joint_max_effort/l_shoulder_lift_joint
+ * /l_cart/joint_max_effort/l_shoulder_pan_joint
+ * /l_cart/joint_max_effort/l_upper_arm_roll_joint
+ * /l_cart/joint_max_effort/l_wrist_flex_joint
+ * /l_cart/joint_max_effort/l_wrist_roll_joint
+ * /l_cart/k_posture
+ * /l_cart/pose_command_filter
+ * /l_cart/root_name
+ * /l_cart/tip_name
+ * /l_cart/type
+ * /l_cart/vel_saturation_rot
+ * /l_cart/vel_saturation_trans
+ * /l_gripper_grasp_posture_controller/gripper_closed_gap_value
+ * /l_gripper_grasp_posture_controller/gripper_max_effort
+ * /l_gripper_grasp_posture_controller/gripper_object_presence_threshold
+ * /l_gripper_grasp_posture_controller/gripper_open_gap_value
+ * /l_gripper_grasp_posture_controller/gripper_type
+ * /l_gripper_grasp_posture_controller/gripper_virtual_joint_name
+ * /laser_self_filter/min_sensor_dist
+ * /laser_self_filter/self_see_default_padding
+ * /laser_self_filter/self_see_default_scale
+ * /laser_self_filter/self_see_links
+ * /laser_self_filter/sensor_frame
+ * /laser_self_filter/subsample_value
+ * /move_left_arm/controller_action_name
+ * /move_left_arm/group
+ * /move_left_arm/head_monitor_link
+ * /move_left_arm/log_to_warehouse
+ * /move_right_arm/controller_action_name
+ * /move_right_arm/group
+ * /move_right_arm/head_monitor_link
+ * /move_right_arm/log_to_warehouse
+ * /object_manipulator/default_cluster_planner
+ * /object_manipulator/default_database_planner
+ * /object_manipulator/default_probabilistic_planner
+ * /object_manipulator/left_arm_cartesian_controller
+ * /object_manipulator/left_arm_joint_controller
+ * /object_manipulator/randomize_grasps
+ * /object_manipulator/right_arm_cartesian_controller
+ * /object_manipulator/right_arm_joint_controller
+ * /object_manipulator/use_probabilistic_grasp_planner
+ * /object_modeling_stereo_self_filter/min_sensor_dist
+ * /object_modeling_stereo_self_filter/self_see_default_padding
+ * /object_modeling_stereo_self_filter/self_see_default_scale
+ * /object_modeling_stereo_self_filter/self_see_links
+ * /object_modeling_stereo_self_filter/sensor_frame
+ * /object_modeling_stereo_self_filter/subsample_value
+ * /ompl_planning/default_planner_config
+ * /ompl_planning/groups
+ * /ompl_planning/left_arm/kinematics_solver
+ * /ompl_planning/left_arm/planner_configs
+ * /ompl_planning/left_arm/planner_type
+ * /ompl_planning/left_arm/projection_evaluator
+ * /ompl_planning/left_arm/redundancy/name
+ * /ompl_planning/left_arm/root_name
+ * /ompl_planning/left_arm/tip_name
+ * /ompl_planning/left_arm_cartesian/kinematics_solver
+ * /ompl_planning/left_arm_cartesian/longest_valid_segment_fraction
+ * /ompl_planning/left_arm_cartesian/parent_frame
+ * /ompl_planning/left_arm_cartesian/physical_group
+ * /ompl_planning/left_arm_cartesian/pitch/type
+ * /ompl_planning/left_arm_cartesian/planner_configs
+ * /ompl_planning/left_arm_cartesian/planner_type
+ * /ompl_planning/left_arm_cartesian/projection_evaluator
+ * /ompl_planning/left_arm_cartesian/roll/type
+ * /ompl_planning/left_arm_cartesian/root_name
+ * /ompl_planning/left_arm_cartesian/state_spaces
+ * /ompl_planning/left_arm_cartesian/tip_name
+ * /ompl_planning/left_arm_cartesian/x/max
+ * /ompl_planning/left_arm_cartesian/x/min
+ * /ompl_planning/left_arm_cartesian/x/type
+ * /ompl_planning/left_arm_cartesian/y/max
+ * /ompl_planning/left_arm_cartesian/y/min
+ * /ompl_planning/left_arm_cartesian/y/type
+ * /ompl_planning/left_arm_cartesian/yaw/type
+ * /ompl_planning/left_arm_cartesian/z/max
+ * /ompl_planning/left_arm_cartesian/z/min
+ * /ompl_planning/left_arm_cartesian/z/type
+ * /ompl_planning/planner_configs/LBKPIECEkConfig1/type
+ * /ompl_planning/planner_configs/SBLkConfig1/type
+ * /ompl_planning/publish_diagnostics
+ * /ompl_planning/right_arm/kinematics_solver
+ * /ompl_planning/right_arm/planner_configs
+ * /ompl_planning/right_arm/planner_type
+ * /ompl_planning/right_arm/projection_evaluator
+ * /ompl_planning/right_arm/redundancy/name
+ * /ompl_planning/right_arm/root_name
+ * /ompl_planning/right_arm/tip_name
+ * /ompl_planning/right_arm_cartesian/kinematics_solver
+ * /ompl_planning/right_arm_cartesian/longest_valid_segment_fraction
+ * /ompl_planning/right_arm_cartesian/parent_frame
+ * /ompl_planning/right_arm_cartesian/physical_group
+ * /ompl_planning/right_arm_cartesian/pitch/type
+ * /ompl_planning/right_arm_cartesian/planner_configs
+ * /ompl_planning/right_arm_cartesian/planner_type
+ * /ompl_planning/right_arm_cartesian/projection_evaluator
+ * /ompl_planning/right_arm_cartesian/roll/type
+ * /ompl_planning/right_arm_cartesian/root_name
+ * /ompl_planning/right_arm_cartesian/state_spaces
+ * /ompl_planning/right_arm_cartesian/tip_name
+ * /ompl_planning/right_arm_cartesian/x/max
+ * /ompl_planning/right_arm_cartesian/x/min
+ * /ompl_planning/right_arm_cartesian/x/type
+ * /ompl_planning/right_arm_cartesian/y/max
+ * /ompl_planning/right_arm_cartesian/y/min
+ * /ompl_planning/right_arm_cartesian/y/type
+ * /ompl_planning/right_arm_cartesian/yaw/type
+ * /ompl_planning/right_arm_cartesian/z/max
+ * /ompl_planning/right_arm_cartesian/z/min
+ * /ompl_planning/right_arm_cartesian/z/type
+ * /pr2_gripper_grasp_planner_cluster/actual_wrist_frame_in_model_frame
+ * /pr2_gripper_grasp_planner_cluster/backoff_depth_steps
+ * /pr2_gripper_grasp_planner_cluster/default_pregrasp_dist
+ * /pr2_gripper_grasp_planner_cluster/grasp_joint_angles/left_arm
+ * /pr2_gripper_grasp_planner_cluster/grasp_joint_angles/right_arm
+ * /pr2_gripper_grasp_planner_cluster/grasp_joint_efforts/left_arm
+ * /pr2_gripper_grasp_planner_cluster/grasp_joint_efforts/right_arm
+ * /pr2_gripper_grasp_planner_cluster/gripper_boxes
+ * /pr2_gripper_grasp_planner_cluster/gripper_opening
+ * /pr2_gripper_grasp_planner_cluster/height_good_for_side_grasps
+ * /pr2_gripper_grasp_planner_cluster/joint_names/left_arm
+ * /pr2_gripper_grasp_planner_cluster/joint_names/right_arm
+ * /pr2_gripper_grasp_planner_cluster/min_good_grasp_points
+ * /pr2_gripper_grasp_planner_cluster/pregrasp_joint_angles/left_arm
+ * /pr2_gripper_grasp_planner_cluster/pregrasp_joint_angles/right_arm
+ * /pr2_gripper_grasp_planner_cluster/pregrasp_joint_efforts/left_arm
+ * /pr2_gripper_grasp_planner_cluster/pregrasp_joint_efforts/right_arm
+ * /pr2_gripper_grasp_planner_cluster/side_grasp_start_height
+ * /pr2_gripper_grasp_planner_cluster/space_boxes
+ * /pr2_gripper_grasp_planner_cluster/wrist_to_fingertip_dist
+ * /pr2_gripper_grasp_planner_cluster/wrist_to_palm_dist
+ * /pr2_gripper_grasp_planner_cluster/z_up_frame
+ * /pr2_left_arm_kinematics/group
+ * /pr2_left_arm_kinematics/object_padd
+ * /pr2_left_arm_kinematics/root_name
+ * /pr2_left_arm_kinematics/tip_name
+ * /pr2_right_arm_kinematics/group
+ * /pr2_right_arm_kinematics/object_padd
+ * /pr2_right_arm_kinematics/root_name
+ * /pr2_right_arm_kinematics/tip_name
+ * /r_cart/cart_gains/rot/d
+ * /r_cart/cart_gains/rot/p
+ * /r_cart/cart_gains/trans/d
+ * /r_cart/cart_gains/trans/p
+ * /r_cart/jacobian_inverse_damping
+ * /r_cart/joint_feedforward/r_elbow_flex_joint
+ * /r_cart/joint_feedforward/r_forearm_roll_joint
+ * /r_cart/joint_feedforward/r_shoulder_lift_joint
+ * /r_cart/joint_feedforward/r_shoulder_pan_joint
+ * /r_cart/joint_feedforward/r_upper_arm_roll_joint
+ * /r_cart/joint_feedforward/r_wrist_flex_joint
+ * /r_cart/joint_feedforward/r_wrist_roll_joint
+ * /r_cart/joint_max_effort/r_elbow_flex_joint
+ * /r_cart/joint_max_effort/r_forearm_roll_joint
+ * /r_cart/joint_max_effort/r_shoulder_lift_joint
+ * /r_cart/joint_max_effort/r_shoulder_pan_joint
+ * /r_cart/joint_max_effort/r_upper_arm_roll_joint
+ * /r_cart/joint_max_effort/r_wrist_flex_joint
+ * /r_cart/joint_max_effort/r_wrist_roll_joint
+ * /r_cart/k_posture
+ * /r_cart/pose_command_filter
+ * /r_cart/root_name
+ * /r_cart/tip_name
+ * /r_cart/type
+ * /r_cart/vel_saturation_rot
+ * /r_cart/vel_saturation_trans
+ * /r_gripper_grasp_posture_controller/gripper_closed_gap_value
+ * /r_gripper_grasp_posture_controller/gripper_max_effort
+ * /r_gripper_grasp_posture_controller/gripper_object_presence_threshold
+ * /r_gripper_grasp_posture_controller/gripper_open_gap_value
+ * /r_gripper_grasp_posture_controller/gripper_type
+ * /r_gripper_grasp_posture_controller/gripper_virtual_joint_name
+ * /reactive_grasp_node_left/use_slip_controller
+ * /reactive_grasp_node_left/use_slip_detection
+ * /reactive_grasp_node_left/use_task_cartesian
+ * /reactive_grasp_node_right/use_slip_controller
+ * /reactive_grasp_node_right/use_slip_detection
+ * /reactive_grasp_node_right/use_task_cartesian
+ * /robot_description_planning/default_collision_operations
+ * /robot_description_planning/default_object_padding
+ * /robot_description_planning/default_robot_padding
+ * /robot_description_planning/distance_collision_operations
+ * /robot_description_planning/groups
+ * /robot_description_planning/multi_dof_joints
+ * /rosdistro
+ * /rosversion
+ * /scan_to_cloud_filter_chain_tilt_laser/incident_angle_correction
+ * /scan_to_cloud_filter_chain_tilt_laser/scan_filter_chain
+ * /scan_to_cloud_filter_chain_tilt_laser/target_frame
+ * /tabletop_collision_map_processing/get_model_mesh_srv
+ * /tabletop_collision_map_processing/static_map_cloud_name
+ * /tabletop_collision_map_processing/table_thickness
+ * /tabletop_complete_node/perform_fit_merge
+ * /tabletop_object_recognition/fit_merge_threshold
+ * /tabletop_object_recognition/get_model_list_srv
+ * /tabletop_object_recognition/get_model_mesh_srv
+ * /tabletop_object_recognition/min_marker_quality
+ * /tabletop_object_recognition/model_set
+ * /tabletop_segmentation/cluster_distance
+ * /tabletop_segmentation/clustering_voxel_size
+ * /tabletop_segmentation/flatten_table
+ * /tabletop_segmentation/inlier_threshold
+ * /tabletop_segmentation/min_cluster_size
+ * /tabletop_segmentation/plane_detection_voxel_size
+ * /tabletop_segmentation/processing_frame
+ * /tabletop_segmentation/table_padding
+ * /tabletop_segmentation/table_z_filter_max
+ * /tabletop_segmentation/table_z_filter_min
+ * /tabletop_segmentation/up_direction
+ * /tabletop_segmentation/x_filter_max
+ * /tabletop_segmentation/x_filter_min
+ * /tabletop_segmentation/y_filter_max
+ * /tabletop_segmentation/y_filter_min
+ * /tabletop_segmentation/z_filter_max
+ * /tabletop_segmentation/z_filter_min
+ * /trajectory_filter/object_padd
+ * /trajectory_filter_server/filter_chain
+ * /trajectory_filter_server/joint_limits/l_elbow_flex_joint/angle_wraparound
+ * /trajectory_filter_server/joint_limits/l_elbow_flex_joint/has_acceleration_limits
+ * /trajectory_filter_server/joint_limits/l_elbow_flex_joint/has_position_limits
+ * /trajectory_filter_server/joint_limits/l_elbow_flex_joint/has_velocity_limits
+ * /trajectory_filter_server/joint_limits/l_elbow_flex_joint/max_acceleration
+ * /trajectory_filter_server/joint_limits/l_elbow_flex_joint/max_velocity
+ * /trajectory_filter_server/joint_limits/l_forearm_roll_joint/angle_wraparound
+ * /trajectory_filter_server/joint_limits/l_forearm_roll_joint/has_acceleration_limits
+ * /trajectory_filter_server/joint_limits/l_forearm_roll_joint/has_position_limits
+ * /trajectory_filter_server/joint_limits/l_forearm_roll_joint/has_velocity_limits
+ * /trajectory_filter_server/joint_limits/l_forearm_roll_joint/max_acceleration
+ * /trajectory_filter_server/joint_limits/l_forearm_roll_joint/max_velocity
+ * /trajectory_filter_server/joint_limits/l_shoulder_lift_joint/angle_wraparound
+ * /trajectory_filter_server/joint_limits/l_shoulder_lift_joint/has_acceleration_limits
+ * /trajectory_filter_server/joint_limits/l_shoulder_lift_joint/has_position_limits
+ * /trajectory_filter_server/joint_limits/l_shoulder_lift_joint/has_velocity_limits
+ * /trajectory_filter_server/joint_limits/l_shoulder_lift_joint/max_acceleration
+ * /trajectory_filter_server/joint_limits/l_shoulder_lift_joint/max_velocity
+ * /trajectory_filter_server/joint_limits/l_shoulder_pan_joint/angle_wraparound
+ * /trajectory_filter_server/joint_limits/l_shoulder_pan_joint/has_acceleration_limits
+ * /trajectory_filter_server/joint_limits/l_shoulder_pan_joint/has_position_limits
+ * /trajectory_filter_server/joint_limits/l_shoulder_pan_joint/has_velocity_limits
+ * /trajectory_filter_server/joint_limits/l_shoulder_pan_joint/max_acceleration
+ * /trajectory_filter_server/joint_limits/l_shoulder_pan_joint/max_velocity
+ * /trajectory_filter_server/joint_limits/l_upper_arm_roll_joint/angle_wraparound
+ * /trajectory_filter_server/joint_limits/l_upper_arm_roll_joint/has_acceleration_limits
+ * /trajectory_filter_server/joint_limits/l_upper_arm_roll_joint/has_position_limits
+ * /trajectory_filter_server/joint_limits/l_upper_arm_roll_joint/has_velocity_limits
+ * /trajectory_filter_server/joint_limits/l_upper_arm_roll_joint/max_acceleration
+ * /trajectory_filter_server/joint_limits/l_upper_arm_roll_joint/max_velocity
+ * /trajectory_filter_server/joint_limits/l_wrist_flex_joint/angle_wraparound
+ * /trajectory_filter_server/joint_limits/l_wrist_flex_joint/has_acceleration_limits
+ * /trajectory_filter_server/joint_limits/l_wrist_flex_joint/has_position_limits
+ * /trajectory_filter_server/joint_limits/l_wrist_flex_joint/has_velocity_limits
+ * /trajectory_filter_server/joint_limits/l_wrist_flex_joint/max_acceleration
+ * /trajectory_filter_server/joint_limits/l_wrist_flex_joint/max_velocity
+ * /trajectory_filter_server/joint_limits/l_wrist_roll_joint/angle_wraparound
+ * /trajectory_filter_server/joint_limits/l_wrist_roll_joint/has_acceleration_limits
+ * /trajectory_filter_server/joint_limits/l_wrist_roll_joint/has_position_limits
+ * /trajectory_filter_server/joint_limits/l_wrist_roll_joint/has_velocity_limits
+ * /trajectory_filter_server/joint_limits/l_wrist_roll_joint/max_acceleration
+ * /trajectory_filter_server/joint_limits/l_wrist_roll_joint/max_velocity
+ * /trajectory_filter_server/joint_limits/r_elbow_flex_joint/angle_wraparound
+ * /trajectory_filter_server/joint_limits/r_elbow_flex_joint/has_acceleration_limits
+ * /trajectory_filter_server/joint_limits/r_elbow_flex_joint/has_position_limits
+ * /trajectory_filter_server/joint_limits/r_elbow_flex_joint/has_velocity_limits
+ * /trajectory_filter_server/joint_limits/r_elbow_flex_joint/max_acceleration
+ * /trajectory_filter_server/joint_limits/r_elbow_flex_joint/max_velocity
+ * /trajectory_filter_server/joint_limits/r_forearm_roll_joint/angle_wraparound
+ * /trajectory_filter_server/joint_limits/r_forearm_roll_joint/has_acceleration_limits
+ * /trajectory_filter_server/joint_limits/r_forearm_roll_joint/has_position_limits
+ * /trajectory_filter_server/joint_limits/r_forearm_roll_joint/has_velocity_limits
+ * /trajectory_filter_server/joint_limits/r_forearm_roll_joint/max_acceleration
+ * /trajectory_filter_server/joint_limits/r_forearm_roll_joint/max_velocity
+ * /trajectory_filter_server/joint_limits/r_shoulder_lift_joint/angle_wraparound
+ * /trajectory_filter_server/joint_limits/r_shoulder_lift_joint/has_acceleration_limits
+ * /trajectory_filter_server/joint_limits/r_shoulder_lift_joint/has_position_limits
+ * /trajectory_filter_server/joint_limits/r_shoulder_lift_joint/has_velocity_limits
+ * /trajectory_filter_server/joint_limits/r_shoulder_lift_joint/max_acceleration
+ * /trajectory_filter_server/joint_limits/r_shoulder_lift_joint/max_velocity
+ * /trajectory_filter_server/joint_limits/r_shoulder_pan_joint/angle_wraparound
+ * /trajectory_filter_server/joint_limits/r_shoulder_pan_joint/has_acceleration_limits
+ * /trajectory_filter_server/joint_limits/r_shoulder_pan_joint/has_position_limits
+ * /trajectory_filter_server/joint_limits/r_shoulder_pan_joint/has_velocity_limits
+ * /trajectory_filter_server/joint_limits/r_shoulder_pan_joint/max_acceleration
+ * /trajectory_filter_server/joint_limits/r_shoulder_pan_joint/max_velocity
+ * /trajectory_filter_server/joint_limits/r_upper_arm_roll_joint/angle_wraparound
+ * /trajectory_filter_server/joint_limits/r_upper_arm_roll_joint/has_acceleration_limits
+ * /trajectory_filter_server/joint_limits/r_upper_arm_roll_joint/has_position_limits
+ * /trajectory_filter_server/joint_limits/r_upper_arm_roll_joint/has_velocity_limits
+ * /trajectory_filter_server/joint_limits/r_upper_arm_roll_joint/max_acceleration
+ * /trajectory_filter_server/joint_limits/r_upper_arm_roll_joint/max_velocity
+ * /trajectory_filter_server/joint_limits/r_wrist_flex_joint/angle_wraparound
+ * /trajectory_filter_server/joint_limits/r_wrist_flex_joint/has_acceleration_limits
+ * /trajectory_filter_server/joint_limits/r_wrist_flex_joint/has_position_limits
+ * /trajectory_filter_server/joint_limits/r_wrist_flex_joint/has_velocity_limits
+ * /trajectory_filter_server/joint_limits/r_wrist_flex_joint/max_acceleration
+ * /trajectory_filter_server/joint_limits/r_wrist_flex_joint/max_velocity
+ * /trajectory_filter_server/joint_limits/r_wrist_roll_joint/angle_wraparound
+ * /trajectory_filter_server/joint_limits/r_wrist_roll_joint/has_acceleration_limits
+ * /trajectory_filter_server/joint_limits/r_wrist_roll_joint/has_position_limits
+ * /trajectory_filter_server/joint_limits/r_wrist_roll_joint/has_velocity_limits
+ * /trajectory_filter_server/joint_limits/r_wrist_roll_joint/max_acceleration
+ * /trajectory_filter_server/joint_limits/r_wrist_roll_joint/max_velocity
+ * /trajectory_filter_server/service_type
+ * /trajectory_filter_unnormalizer/filter_chain
+ * /trajectory_filter_unnormalizer/message_type
+ * /warehouse_host
+ * /warehouse_port
+
+NODES
+  /
+    change_narrow_stereo_params (dynamic_reconfigure/dynparam)
+    cluster_bounding_box_finder (object_manipulator/cluster_bounding_box_finder_server.py)
+    collider_node (collider/collider_node)
+    dynamic_reconfigure_stereo (dynamic_reconfigure/dynparam)
+    dynparam_abu_11938_827841829024132987 (dynamic_reconfigure/dynparam)
+    environment_server (planning_environment/environment_server)
+    head_monitor (move_arm_head_monitor/move_arm_head_monitor)
+    interpolated_ik_node_left (interpolated_ik_motion_planner/interpolated_ik_motion_planner.py)
+    interpolated_ik_node_right (interpolated_ik_motion_planner/interpolated_ik_motion_planner.py)
+    l_gripper_grasp_posture_controller (pr2_gripper_grasp_controller/pr2_gripper_grasp_controller)
+    laser_self_filter (robot_self_filter/self_filter)
+    laser_tilt_controller_3dnav_params (pr2_mechanism_controllers/send_periodic_cmd_srv.py)
+    move_left_arm (move_arm_warehouse/move_arm_simple_action)
+    move_right_arm (move_arm_warehouse/move_arm_simple_action)
+    object_manipulator (object_manipulator/object_manipulator_node)
+    object_modeling_stereo_self_filter (robot_self_filter_color/self_filter_color)
+    objects_database_node (household_objects_database/objects_database_node)
+    ompl_planning (ompl_ros_interface/ompl_ros)
+    planning_scene_validity_server (planning_environment/planning_scene_validity_server)
+    pr2_gripper_grasp_planner_cluster (pr2_gripper_grasp_planner_cluster/point_cluster_grasp_planner_server.py)
+    pr2_left_arm_kinematics (pr2_arm_kinematics_constraint_aware/pr2_arm_kinematics_constraint_aware)
+    pr2_right_arm_kinematics (pr2_arm_kinematics_constraint_aware/pr2_arm_kinematics_constraint_aware)
+    r_gripper_grasp_posture_controller (pr2_gripper_grasp_controller/pr2_gripper_grasp_controller)
+    reactive_grasp_node_left (pr2_gripper_reactive_approach/reactive_grasp_server.py)
+    reactive_grasp_node_right (pr2_gripper_reactive_approach/reactive_grasp_server.py)
+    scan_to_cloud_filter_chain_tilt_laser (laser_filters/scan_to_cloud_filter_chain)
+    spawn_jt_cartesian (pr2_controller_manager/spawner)
+    tabletop_collision_map_processing (tabletop_collision_map_processing/tabletop_collision_map_processing_node)
+    tabletop_complete_node (tabletop_object_detector/tabletop_complete_node)
+    tabletop_object_recognition (tabletop_object_detector/tabletop_object_recognition)
+    tabletop_segmentation (tabletop_object_detector/tabletop_segmentation)
+    trajectory_filter_server (trajectory_filter_server/trajectory_filter_server)
+    trajectory_filter_unnormalizer (trajectory_filter_server/trajectory_filter_server)
+
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/opt/ros/fuerte/stacks/pr2_object_manipulation/applications/pr2_tabletop_manipulation_launch/launch/pr2_tabletop_manipulation.launch http://localhost:11311
+core service [/rosout] found
+[1mprocess[objects_database_node-1]: started with pid [12031][0m
+[1mprocess[laser_tilt_controller_3dnav_params-2]: started with pid [12032][0m
+[1mprocess[dynparam_abu_11938_827841829024132987-3]: started with pid [12059][0m
+[1mprocess[scan_to_cloud_filter_chain_tilt_laser-4]: started with pid [12078][0m
+[1mprocess[laser_self_filter-5]: started with pid [12096][0m
+[1mprocess[object_modeling_stereo_self_filter-6]: started with pid [12099][0m
+[1mprocess[collider_node-7]: started with pid [12144][0m
+[1m[laser_tilt_controller_3dnav_params-2] process has finished cleanly
+log file: /home/ross/.ros/log/a5059434-853c-11[0m[ INFO] [1362450891.592908046, 85.438000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450903.823226524, 86.458000000]: Waiting for environment server planning scene registration service /register_planning_scene[0m
+[0m[ INFO] [1362450903.828428031, 86.458000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450908.840952414, 87.470000000]: Waiting for environment server planning scene registration service /register_planning_scene[0m
+[0m[ INFO] [1362450908.842582118, 87.470000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450915.638331616, 88.487000000]: Waiting for environment server planning scene registration service /register_planning_scene[0m
+[0m[ INFO] [1362450915.641255863, 88.487000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450915.966924832, 88.553000000]: waitForService: Service [/register_planning_scene] is now available.[0m
+[0m[ INFO] [1362450917.434793123, 88.755000000]: Adding state space: x[0m
+[0m[ INFO] [1362450917.443823587, 88.755000000]: Adding state space: y[0m
+[0m[ INFO] [1362450917.457158997, 88.759000000]: Adding state space: z[0m
+[0m[ INFO] [1362450917.474265260, 88.759000000]: Adding state space: roll[0m
+[0m[ INFO] [1362450917.483460907, 88.764000000]: Adding state space: pitch[0m
+[0m[ INFO] [1362450917.489576955, 88.764000000]: Adding state space: yaw[0m
+[0m[ INFO] [1362450917.499366267, 88.764000000]: Adding state space: r_upper_arm_roll_joint[0m
+[33m[ WARN] [1362450917.727478854, 88.778000000]: The root link base_footprint has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.[0m
+[0m[ INFO] [1362450917.747241440, 88.779000000]: Adding state space: x[0m
+[0m[ INFO] [1362450917.755978740, 88.779000000]: Adding state space: y[0m
+[0m[ INFO] [1362450917.764813753, 88.780000000]: Adding state space: z[0m
+[0m[ INFO] [1362450917.773000293, 88.780000000]: Adding state space: roll[0m
+[0m[ INFO] [1362450917.779098148, 88.780000000]: Adding state space: pitch[0m
+[0m[ INFO] [1362450917.787663548, 88.781000000]: Adding state space: yaw[0m
+[0m[ INFO] [1362450917.793281436, 88.781000000]: Adding state space: r_upper_arm_roll_joint[0m
+[33m[ WARN] [1362450918.029107974, 88.802000000]: The root link base_footprint has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.[0m
+[0m[ INFO] [1362450918.053708449, 88.802000000]: Adding state space: x[0m
+[0m[ INFO] [1362450918.060647788, 88.802000000]: Adding state space: y[0m
+[0m[ INFO] [1362450918.069867248, 88.802000000]: Adding state space: z[0m
+[0m[ INFO] [1362450918.085610525, 88.802000000]: Adding state space: roll[0m
+[0m[ INFO] [1362450918.092380432, 88.814000000]: Adding state space: pitch[0m
+[0m[ INFO] [1362450918.097889688, 88.814000000]: Adding state space: yaw[0m
+[0m[ INFO] [1362450918.102697157, 88.814000000]: Adding state space: l_upper_arm_roll_joint[0m
+[33m[ WARN] [1362450918.342049906, 88.852000000]: The root link base_footprint has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.[0m
+[0m[ INFO] [1362450918.360915979, 88.852000000]: Adding state space: x[0m
+[0m[ INFO] [1362450918.369787046, 88.852000000]: Adding state space: y[0m
+[0m[ INFO] [1362450918.382824269, 88.852000000]: Adding state space: z[0m
+[0m[ INFO] [1362450918.394023925, 88.858000000]: Adding state space: roll[0m
+[0m[ INFO] [1362450918.399431136, 88.858000000]: Adding state space: pitch[0m
+[0m[ INFO] [1362450918.405876368, 88.858000000]: Adding state space: yaw[0m
+[0m[ INFO] [1362450918.410435744, 88.858000000]: Adding state space: l_upper_arm_roll_joint[0m
+[3[INFO] [WallTime: 1362450897.906309] [85.516000] reactive_grasp_server: using_slip_controller:False
+[INFO] [WallTime: 1362450897.906593] [85.516000] reactive_grasp_server: using_slip_detection:False
+[INFO] [WallTime: 1362450898.184387] [85.524000] initializing l controller manager
+[INFO] [WallTime: 1362450898.184809] [85.524000] controller manager: using_slip_controller:False
+[INFO] [WallTime: 1362450898.185184] [85.524000] controller manager: using_slip_detection:False
+[INFO] [WallTime: 1362450898.185510] [85.524000] controller manager waiting for pr2_controller_manager services to be there
+[INFO] [WallTime: 1362450898.185845] [85.524000] controller manager: waiting for pr2_controller_manager/load_controller to be there
+[INFO] [WallTime: 1362450898.191599] [85.524000] controller manager: pr2_controller_manager/load_controller found
+[INFO] [WallTime: 1362450898.192226] [85.524000] controller manager: waiting for pr2_controller_manager/unload_controller to be there
+[INFO] [WallTime: 1362450898.199110] [85.524000] controller manager: pr2_controller_manager/unload_controller found
+[INFO] [WallTime: 1362450898.199551] [85.524000] controller manager: waiting for pr2_controller_manager/switch_controller to be there
+[INFO] [WallTime: 1362450898.204371] [85.524000] controller manager: pr2_controller_manager/switch_controller found
+[INFO] [WallTime: 1362450898.204995] [85.524000] controller manager: waiting for pr2_controller_manager/list_controllers to be there
+[INFO] [WallTime: 1362450898.215709] [85.524000] controller manager: pr2_controller_manager/list_controllers found
+[INFO] [WallTime: 1362450898.370249] [85.526000] controller manager: waiting for l_arm_controller/joint_trajectory_action to be there
+[INFO] [WallTime: 1362450898.615376] [85.535000] controller manager: l_arm_controller/joint_trajectory_action found
+[INFO] [WallTime: 1362450898.615819] [85.535000] controller manager: waiting for l_gripper_controller/gripper_action to be there
+[INFO] [WallTime: 1362450898.616387] [85.535000] controller manager: l_gripper_controller/gripper_action found
+[INFO] [WallTime: 1362450898.617319] [85.535000] advertising on collision object topics
+[INFO] [WallTime: 1362450898.639825] [85.535000] waiting for collision map reset service
+[INFO] [WallTime: 1362450901.674467] [86.044000] found collision map reset service
+[INFO] [WallTime: 1362450901.674996] [86.044000] waiting for set planning scene diff service
+[INFO] [WallTime: 1362450915.922233] [88.542000] done initializing collision map interface
+[INFO] [WallTime: 1362450915.933905] [88.542000] controller_manager: use_trajectory_cartesian: 0
+[INFO] [WallTime: 1362450915.934510] [88.542000] controller_manager: use_task_cartesian: False
+task_controller:  False
+[INFO] [WallTime: 1362450915.940485] [88.542000] loading any unloaded Cartesian controllers
+[INFO] [WallTime: 1362450916.130770] [88.566000] all Cartesian controllers loaded
+[INFO] [WallTime: 1362450918.210177] [88.814000] done loading controllers
+[INFO] [WallTime: 1362450918.214404] [88.814000] creating IKUtilities class objects
+[INFO] [WallTime: 1362450918.223063] [88.814000] ik_utilities: waiting for IK services to be there
+[INFO] [WallTime: 1362450918.239213] [88.814000] ik_utilities: services found
+[INFO] [WallTime: 1362450918.240361] [88.814000] getting the IK solver info
+[INFO] [WallTime: 1362450918.246477] [88.814000] done getting the IK solver info
+[INFO] [WallTime: 1362450918.256368] [88.814000] ik_utilities: done init
+[INFO] [WallTime: 1362450918.257101] [88.814000] done creating IKUtilities class objects
+[INFO] [WallTime: 1362450918.266903] [88.837000] done with controller_manager init for the l arm
+initializing l fingertip sensor listener
+[INFO] [WallTime: 1362450920.784839] [89.124000] left tip thresholds:[125.0, 125.0, 125.0, 125.0, 125.0, 125.0, 125.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0]
+[INFO] [WallTime: 1362450920.785361] [89.124000] right tip thresholds:[125.0, 125.0, 125.0, 125.0, 125.0, 125.0, 125.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 2[INFO] [WallTime: 1362450897.945759] [85.517000] reactive_grasp_server: using_slip_controller:False
+[INFO] [WallTime: 1362450897.946093] [85.517000] reactive_grasp_server: using_slip_detection:False
+[INFO] [WallTime: 1362450898.206221] [85.524000] initializing r controller manager
+[INFO] [WallTime: 1362450898.206712] [85.524000] controller manager: using_slip_controller:False
+[INFO] [WallTime: 1362450898.207051] [85.524000] controller manager: using_slip_detection:False
+[INFO] [WallTime: 1362450898.207367] [85.524000] controller manager waiting for pr2_controller_manager services to be there
+[INFO] [WallTime: 1362450898.207688] [85.524000] controller manager: waiting for pr2_controller_manager/load_controller to be there
+[INFO] [WallTime: 1362450898.216832] [85.524000] controller manager: pr2_controller_manager/load_controller found
+[INFO] [WallTime: 1362450898.218902] [85.524000] controller manager: waiting for pr2_controller_manager/unload_controller to be there
+[INFO] [WallTime: 1362450898.231789] [85.524000] controller manager: pr2_controller_manager/unload_controller found
+[INFO] [WallTime: 1362450898.232780] [85.524000] controller manager: waiting for pr2_controller_manager/switch_controller to be there
+[INFO] [WallTime: 1362450898.244095] [85.524000] controller manager: pr2_controller_manager/switch_controller found
+[INFO] [WallTime: 1362450898.244531] [85.524000] controller manager: waiting for pr2_controller_manager/list_controllers to be there
+[INFO] [WallTime: 1362450898.247680] [85.524000] controller manager: pr2_controller_manager/list_controllers found
+[INFO] [WallTime: 1362450898.379661] [85.526000] controller manager: waiting for r_arm_controller/joint_trajectory_action to be there
+[INFO] [WallTime: 1362450898.611937] [85.535000] controller manager: r_arm_controller/joint_trajectory_action found
+[INFO] [WallTime: 1362450898.612425] [85.535000] controller manager: waiting for r_gripper_controller/gripper_action to be there
+[INFO] [WallTime: 1362450898.623368] [85.535000] controller manager: r_gripper_controller/gripper_action found
+[INFO] [WallTime: 1362450898.624976] [85.535000] advertising on collision object topics
+[INFO] [WallTime: 1362450898.648690] [85.535000] waiting for collision map reset service
+[INFO] [WallTime: 1362450901.691130] [86.049000] found collision map reset service
+[INFO] [WallTime: 1362450901.691623] [86.049000] waiting for set planning scene diff service
+[INFO] [WallTime: 1362450915.938220] [88.542000] done initializing collision map interface
+[INFO] [WallTime: 1362450915.945007] [88.542000] controller_manager: use_trajectory_cartesian: 0
+[INFO] [WallTime: 1362450915.945930] [88.542000] controller_manager: use_task_cartesian: False
+task_controller:  False
+[INFO] [WallTime: 1362450915.951727] [88.542000] loading any unloaded Cartesian controllers
+[INFO] [WallTime: 1362450916.209689] [88.585000] all Cartesian controllers loaded
+[INFO] [WallTime: 1362450918.252605] [88.814000] done loading controllers
+[INFO] [WallTime: 1362450918.256175] [88.814000] creating IKUtilities class objects
+[INFO] [WallTime: 1362450918.261091] [88.814000] ik_utilities: waiting for IK services to be there
+[INFO] [WallTime: 1362450918.273909] [88.837000] ik_utilities: services found
+[INFO] [WallTime: 1362450918.274413] [88.837000] getting the IK solver info
+[INFO] [WallTime: 1362450918.281286] [88.837000] done getting the IK solver info
+[INFO] [WallTime: 1362450918.287037] [88.837000] ik_utilities: done init
+[INFO] [WallTime: 1362450918.288084] [88.837000] done creating IKUtilities class objects
+[INFO] [WallTime: 1362450918.296176] [88.837000] done with controller_manager init for the r arm
+initializing r fingertip sensor listener
+[INFO] [WallTime: 1362450920.805254] [89.124000] left tip thresholds:[125.0, 125.0, 125.0, 125.0, 125.0, 125.0, 125.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0]
+[INFO] [WallTime: 1362450920.805890] [89.124000] right tip thresholds:[125.0, 125.0, 125.0, 125.0, 125.0, 125.0, 125.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 2[0m[ INFO] [1362450897.184494233]: Tabletop complete node ready[0m
+[0m[ INFO] [1362450896.172251511]: waitForService: Service [/find_cluster_bounding_box] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450894.965012993]: Using gripper action client on topic /l_gripper_controller/gripper_action[0m
+[0m[ INFO] [1362450894.998105110]: pr2_gripper grasp query service started on topic /l_gripper_grasp_status[0m
+[0m[ INFO] [1362450895.044128928]: pr2_gripper grasp hand posture action server started on topic /l_gripper_grasp_posture_controller[0m
+[0m[ INFO] [1362450894.454658367]: Using gripper action client on topic /r_gripper_controller/gripper_action[0m
+[0m[ INFO] [1362450894.475840215]: pr2_gripper grasp query service started on topic /r_gripper_grasp_status[0m
+[0m[ INFO] [1362450894.507430826]: pr2_gripper grasp hand posture action server started on topic /r_gripper_grasp_posture_controller[0m
+[33m[ WARN] [1362450898.438326941, 85.528000000]: The root link base_footprint has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.[0m
+[33m[ WARN] [1362450898.609543192, 85.535000000]: The root link base_footprint has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.[0m
+[33m[ WARN] [1362450898.849954738, 85.552000000]: The root link base_footprint has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.[0m
+[33m[ WARN] [1362450898.950214728, 85.557000000]: The root link base_footprint has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.[0m
+[0m[ INFO] [1362450898.971182487, 85.560000000]: Object manipulator ready. Default cluster planner: /plan_point_cluster_grasp. Default database planner: /database_grasp_planning.[0m
+[0m[ INFO] [1362450898.971268843, 85.560000000]: Object manipulator ready[0m
+[INFO] [WallTime: 1362450898.505295] [0.000000] cluster bounding box finder is ready for queries
+[33m[ WARN] [1362450898.838968252, 85.549000000]: Deprecation Warning: No '/' detected in FilterType, Please update to 1.2 plugin syntax. [0m
+[33m[ WARN] [1362450898.839113366, 85.549000000]: Replaced UnNormalizeFilterJointTrajectory with joint_normalization_filters/UnNormalizeFilterJointTrajectory[0m
+[0m[ INFO] [1362450898.945969427, 85.557000000]: Successfully parsed urdf file[0m
+[0m[ INFO] [1362450898.956606850, 85.557000000]: Started trajectory filter server[0m
+25.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0]
+done
+[INFO] [WallTime: 1362450920.789321] [89.124000] done with ReactiveGrasper init for the l arm
+[INFO] [WallTime: 1362450920.789869] [89.124000] Reactive grasp action ready
+[33m[ WARN] [1362450892.031832091, 85.444000000]: The root link base_footprint has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.[0m
+[0m[ INFO] [1362450892.081717520, 85.445000000]: Loading pr2_arm_kinematics_constraint_aware server[0m
+[0m[ INFO] [1362450894.160801763, 85.467000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450903.911584433, 86.479000000]: Waiting for environment server planning scene registration service /register_planning_scene[0m
+[0m[ INFO] [1362450903.914052300, 86.479000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450909.107713105, 87.492000000]: Waiting for environment server planning scene registration service /register_planning_scene[0m
+[0m[ INFO] [1362450909.111149974, 87.492000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450915.795543282, 88.527000000]: waitForService: Service [/register_planning_scene] is now available.[0m
+[33m[ WARN] [1362450891.292452912, 85.433000000]: The root link base_footprint has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.[0m
+[0m[ INFO] [1362450891.438795845, 85.435000000]: Loading pr2_arm_kinematics_constraint_aware server[0m
+[0m[ INFO] [1362450893.868128014, 85.465000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450903.904603548, 86.479000000]: Waiting for environment server planning scene registration service /register_planning_scene[0m
+[0m[ INFO] [1362450903.913379363, 86.479000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450909.103865873, 87.492000000]: Waiting for environment server planning scene registration service /register_planning_scene[0m
+[0m[ INFO] [1362450909.108931763, 87.492000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450915.791761859, 88.527000000]: waitForService: Service [/register_planning_scene] is now available.[0m
+[0m[ INFO] [1362450893.374134844, 85.463000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450903.903189194, 86.479000000]: Waiting for environment server planning scene registration service /register_planning_scene[0m
+[0m[ INFO] [1362450903.912264547, 86.479000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450909.101559611, 87.492000000]: Waiting for environment server planning scene registration service /register_planning_scene[0m
+[0m[ INFO] [1362450909.105859739, 87.492000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450915.783165556, 88.527000000]: waitForService: Service [/register_planning_scene] is now available.[0m
+[0m[ INFO] [1362450896.868581201, 85.491000000]: Filtering joint trajectories with constraints[0m
+[33m[ WARN] [1362450896.885952755, 85.491000000]: Deprecation Warning: No '/' detected in FilterType, Please update to 1.2 plugin syntax. [0m
+[33m[ WARN] [1362450896.886141032, 85.491000000]: Replaced UnNormalizeFilterJointTrajectoryWithConstraints with joint_normalization_filters/UnNormalizeFilterJointTrajectoryWithConstraints[0m
+[33m[ WARN] [1362450896.886253038, 85.491000000]: Deprecation Warning: No '/' detected in FilterType, Please update to 1.2 plugin syntax. [0m
+[33m[ WARN] [1362450896.886358038, 85.491000000]: Replaced CubicSplineShortCutterFilterJointTrajectoryWithConstraints with constraint_aware_spline_smoother/CubicSplineShortCutterFilterJointTrajectoryWithConstraints[0m
+[0m[ INFO] [1362450898.467979156, 85.529000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450904.298870168, 86.573000000]: Waiting for environment server planning scene registration service /register_planning_scene[0m
+[0m[ INFO] [1362450904.302052380, 86.573000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450909.700293015, 87.580000000]: Waiting for environment server planning scene registration service /register_planning_scene[0m
+[0m[ INFO] [1362450909.704352139, 87.580000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450915.789583853, 88.527000000]: waitForService: Service [/register_planning_scene] is now available.[0m
+[0m[ INFO] [1362450917.118085543, 88.717000000]: Successfully parsed urdf file[0m
+[0m[ INFO] [1362450917.121547070, 88.717000000]: Started trajectory filter server[0m
+[INFO] [WallTime: 1362450897.783280] [85.513000] randomize_grasps:0
+[INFO] [WallTime: 1362450897.815825] [85.514000] point cluster grasp planner service/action is ready
+[INFO] [WallTime: 1362450897.816283] [85.514000] point cluster grasp planner is ready for queries
+25.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0, 225.0]
+done
+[INFO] [WallTime: 1362450920.814168] [89.124000] done with ReactiveGrasper init for the r arm
+[INFO] [WallTime: 1362450920.816430] [89.124000] Reactive grasp action ready
+3m[ WARN] [1362450918.617674934, 88.873000000]: The root link base_footprint has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.[0m
+[33m[ WARN] [1362450918.818560405, 88.899000000]: The root link base_footprint has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.[0m
+[33m[ WARN] [1362450919.004573289, 88.909000000]: The root link base_footprint has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.[0m
+[33m[ WARN] [1362450919.237630810, 88.933000000]: The root link base_footprint has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.[0m
+[33m[ WARN] [1362450919.618021864, 88.959000000]: The root link base_footprint has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.[0m
+[33m[ WARN] [1362450889.622252644, 85.407000000]: Deprecation Warning: No '/' detected in FilterType, Please update to 1.2 plugin syntax. [0m
+[33m[ WARN] [1362450889.622383126, 85.407000000]: Replaced ScanShadowsFilter with laser_filters/ScanShadowsFilter[0m
+[33m[ WARN] [1362450889.622412870, 85.407000000]: Deprecation Warning: No '/' detected in FilterType, Please update to 1.2 plugin syntax. [0m
+[33m[ WARN] [1362450889.622436691, 85.407000000]: Replaced LaserScanIntensityFilter with laser_filters/LaserScanIntensityFilter[0m
+[0m[ INFO] [1362450892.719017047, 85.450000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450903.825372071, 86.458000000]: Waiting for environment server planning scene registration service /register_planning_scene[0m
+[0m[ INFO] [1362450903.829235376, 86.458000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450908.847697757, 87.470000000]: Waiting for environment server planning scene registration service /register_planning_scene[0m
+[0m[ INFO] [1362450908.849573315, 87.470000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450915.639828323, 88.487000000]: Waiting for environment server planning scene registration service /register_planning_scene[0m
+[0m[ INFO] [1362450915.645548538, 88.487000000]: waitForService: Service [/register_planning_scene] has not been advertised, waiting...[0m
+[0m[ INFO] [1362450915.785364363, 88.527000000]: waitForService: Service [/register_planning_scene] is now available.[0m
+[0m[ INFO] [1362450916.336213709, 88.612000000]: Robot frame is 'base_footprint'[0m
+[0m[ INFO] [1362450917.019232058, 88.713000000]: Connected to the controllers[0m
+[0m[ INFO] [1362450917.112601275, 88.717000000]: Starting head monitor action server for /head_monitor[0m
+[33m[ WARN] [1362450890.054435380, 85.414000000]: No collision geometry specified for link 'l_forearm_cam_frame'[0m
+[33m[ WARN] [1362450894.936910074, 85.473000000]: No collision geometry specified for link 'r_forearm_cam_frame'[0m
+[33m[ WARN] [1362450897.642699982, 85.510000000]: No collision geometry specified for link 'base_laser_link'[0m
+[33m[ WARN] [1362450901.807362099, 86.060000000]: Message from [/scan_to_cloud_filter_chain_tilt_laser] has a non-fully-qualified frame_id [base_footprint]. Resolved locally to [/base_footprint].  This is will likely not work in multi-robot systems.  This message will only print once.[0m
+[0m[ INFO] [1362450889.868783037]: Move arm operating on group right_arm[0m
+[0m[ INFO] [1362450917.714665989, 88.777000000]: Move arm action started[0m
+[0m[ INFO] [1362450892.789308052, 85.451000000]: Robot frame is 'base_footprint'[0m
+[0m[ INFO] [1362450892.851355644, 85.452000000]: Waiting for robot state ...[0m
+[0m[ INFO] [1362450892.851413946, 85.452000000]: Waiting for joint state ...[0m
+[0m[ INFO] [1362450897.385027486, 85.502000000]: Robot state received![0m
+[0m[ INFO] [1362450897.433735186, 85.504000000]: Listening to collision_map using message notifier with target frame /odom_combined [0m
+[0m[ INFO] [1362450904.209344506, 86.508000000]: Waiting for collision map[0m
+[33m[ WARN] [1362450913.122544452, 88.112000000]: Message from [/collider_node] has a non-fully-qualified frame_id [odom_combined]. Resolved locally to [/odom_combined].  This is will likely not work in multi-robot systems.  This message will only print once.[0m
+[0m[ INFO] [1362450915.808277232, 88.527000000]: Environment server started[0m
+[0m[ INFO] [1362450916.134021417, 88.566000000]: Successfully connected to planning scene action server for /planning_scene_validity_server[0m
+[0m[ INFO] [1362450916.335451402, 88.612000000]: Successfully connected to planning scene action server for /head_monitor[0m
+[0m[ INFO] [1362450916.538912857, 88.636000000]: Successfully connected to planning scene action server for /pr2_right_arm_kinematics[0m
+[0m[ INFO] [1362450916.744094133, 88.665000000]: Successfully connected to planning scene action server for /pr2_left_arm_kinematics[0m
+[0m[ INFO] [1362450917.052945190, 88.715000000]: Successfully connected to planning scene action server for /trajectory_filter_server[0m
+[0m[ INFO] [1362450917.366673115, 88.739000000]: Successfully connected to planning scene action server for /ompl_planning[0m
+[33m[ WARN] [1362450892.134192802, 85.445000000]: No collision geometry specified for link 'l_forearm_cam_frame'[0m
+[33m[ WARN] [1362450896.475746280, 85.488000000]: No collision geometry specified for link 'r_forearm_cam_frame'[0m
+[33m[ WARN] [1362450898.744279915, 85.544000000]: No collision geometry specified for link 'base_laser_link'[0m
+[33m[ WARN] [1362450899.120528116, 85.581000000]: No collision geometry specified for link 'l_forearm_cam_frame'[0m
+[33m[ WARN] [1362450900.504347680, 85.835000000]: No collision geometry specified for link 'r_forearm_cam_frame'[0m
+[33m[ WARN] [1362450901.529736527, 86.021000000]: No collision geometry specified for link 'base_laser_link'[0m
+[0m[ INFO] [1362450901.533113489, 86.021000000]: Robot self mask initialized with 32 links[0m
+[0m[ INFO] [1362450901.543152445, 86.021000000]: Adding callback for /tilt_scan_cloud_filtered2[0m
+[33m[ WARN] [1362450890.068043408, 85.414000000]: No collision geometry specified for link 'l_forearm_cam_frame'[0m
+[33m[ WARN] [1362450893.506708718, 85.464000000]: No collision geometry specified for link 'r_forearm_cam_frame'[0m
+[33m[ WARN] [1362450896.112433656, 85.483000000]: No collision geometry specified for link 'base_laser_link'[0m
+[0m[ INFO] [1362450889.993341366]: Move arm operating on group left_arm[0m
+[0m[ INFO] [1362450917.721949990, 88.778000000]: Move arm action started[0m
+e2-8a26-001e644d5dd4/laser_tilt_controller_3dnav_params-2*.log[0m
+[1mprocess[ompl_planning-8]: started with pid [12212][0m
+[1mprocess[move_right_arm-9]: started with pid [12258][0m
+[1m[dynparam_abu_11938_827841829024132987-3] process has finished cleanly
+log file: /home/ross/.ros/log/a5059434-853c-11e2-8a26-001e644d5dd4/dynparam_abu_11938_827841829024132987-3*.log[0m
+[1mprocess[move_left_arm-10]: started with pid [12270][0m
+[1mprocess[head_monitor-11]: started with pid [12309][0m
+[1mprocess[environment_server-12]: started with pid [12345][0m
+[1mprocess[planning_scene_validity_server-13]: started with pid [12385][0m
+[1mprocess[trajectory_filter_server-14]: started with pid [12414][0m
+[1mprocess[pr2_right_arm_kinematics-15]: started with pid [12460][0m
+[1mprocess[pr2_left_arm_kinematics-16]: started with pid [12490][0m
+[1mprocess[dynamic_reconfigure_stereo-17]: started with pid [12571][0m
+[1mprocess[change_narrow_stereo_params-18]: started with pid [12600][0m
+[1mprocess[interpolated_ik_node_right-19]: started with pid [12659][0m
+[1mprocess[interpolated_ik_node_left-20]: started with pid [12671][0m
+[1mprocess[trajectory_filter_unnormalizer-21]: started with pid [12673][0m
+[1mprocess[pr2_gripper_grasp_planner_cluster-22]: started with pid [12699][0m
+[1mprocess[reactive_grasp_node_right-23]: started with pid [12760][0m
+[1m[change_narrow_stereo_params-18] process has finished cleanly
+log file: /home/ross/.ros/log/a5059434-853c-11e2-8a26-001e644d5dd4/change_narrow_stereo_params-18*.log[0m
+[1mprocess[reactive_grasp_node_left-24]: started with pid [12783][0m
+[1m[dynamic_reconfigure_stereo-17] process has finished cleanly
+log file: /home/ross/.ros/log/a5059434-853c-11e2-8a26-001e644d5dd4/dynamic_reconfigure_stereo-17*.log[0m
+[1mprocess[r_gripper_grasp_posture_controller-25]: started with pid [12789][0m
+[1mprocess[l_gripper_grasp_posture_controller-26]: started with pid [12834][0m
+[1mprocess[spawn_jt_cartesian-27]: started with pid [12877][0m
+[1mprocess[object_manipulator-28]: started with pid [12907][0m
+[1mprocess[cluster_bounding_box_finder-29]: started with pid [12931][0m
+[1mprocess[tabletop_collision_map_processing-30]: started with pid [12934][0m
+[1mprocess[tabletop_segmentation-31]: started with pid [12992][0m
+[1mprocess[tabletop_object_recognition-32]: started with pid [13018][0m
+[1mprocess[tabletop_complete_node-33]: started with pid [13097][0m
+[tabletop_complete_node-33] killing on exit
+[tabletop_object_recognition-32] killing on exit
+[tabletop_segmentation-31] killing on exit
+[tabletop_collision_map_processing-30] killing on exit
+[cluster_bounding_box_finder-29] killing on exit
+[spawn_jt_cartesian-27] killing on exit
+[object_manipulator-28] killing on exit
+[r_gripper_grasp_posture_controller-25] killing on exit
+[l_gripper_grasp_posture_controller-26] killing on exit[reactive_grasp_node_left-24] killing on exit
+
+[reactive_grasp_node_right-23] killing on exit
+[pr2_gripper_grasp_planner_cluster-22] killing on exit
+[interpolated_ik_node_left-20] killing on exit
+[trajectory_filter_unnormalizer-21] killing on exit
+[interpolated_ik_node_right-19] killing on exit
+[pr2_left_arm_kinematics-16] killing on exit
+[pr2_right_arm_kinematics-15] killing on exit
+[trajectory_filter_server-14] killing on exit
+[planning_scene_validity_server-13] killing on exit
+[environment_server-12] killing on exit
+[head_monitor-11] killing on exit
+[move_left_arm-10] killing on exit
+[move_right_arm-9] killing on exit
+[ompl_planning-8] killing on exit
+[collider_node-7] killing on exit
+[object_modeling_stereo_self_filter-6] killing on exit
+[laser_self_filter-5] killing on exit
+[scan_to_cloud_filter_chain_tilt_laser-4] killing on exit
+[objects_database_node-1] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m

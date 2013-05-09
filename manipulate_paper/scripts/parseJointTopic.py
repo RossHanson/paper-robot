@@ -1,0 +1,11 @@
+def parseTopic(f):
+    nameLine = f.readline()
+    valLine = f.readline()
+    nameLine = nameLine.replace("[","")
+    nameLine = nameLine.replace("]","")
+    nameLine = nameLine.replace("'","")
+    valLIne = valLine.replace("[","")
+    valLine = valLine.replace("]","")
+    names = nameLine.split(",")
+    vals = valLine.split(",")
+    return dict(zip(names,vals))
