@@ -7,6 +7,11 @@
 #include <cv.h>
 #include <stdlib.h>
 #include <iostream>
+#include <sensor_msgs/PointCloud2.h>
+#include <geometry_msgs/Point.h>
+#include <pcl/ros/conversions.h>
+#include <pcl/point_cloud.h>
+#include <pcl/point_types.h>
 
 using namespace cv;
 using namespace std;
@@ -26,8 +31,9 @@ class ImageConverter
   image_transport::ImageTransport it_;
   image_transport::Subscriber image_sub_;
   image_transport::Subscriber depth_sub_;
+  
   ros::Subscriber point_cloud_sub_;
-  image_transport::Publisher image_pub_;
+  ros::Publisher point_pub_;
   
   Mat outputMat;
   int threshCanny;
@@ -39,6 +45,7 @@ class ImageConverter
   Mat src;
   Mat depth;
   Point2i outputCenter;
+  int imageWidth;
   
   //public: static ImageConverter instance;// = 0;
   
@@ -52,6 +59,7 @@ class ImageConverter
     maxRectSize = 50000;
     rng = RNG(12345);
     outputCenter = Point2i(-1, -1);
+    imageWidth = -1;
 
     namedWindow(WINDOW);
     namedWindow(CANNY_WINDOW);
@@ -63,14 +71,15 @@ class ImageConverter
     createTrackbar( " Min Rect Size:", WINDOW, &minRectSize, maxRectSize, &processImageCallback, this );
     
     ROS_INFO("Initialization finished.");
-    //image_pub_ = it_.advertise("out", 1);
+    point_pub_ = nh_.advertise<geometry_msgs::Point>("/paper_robot/paper/position", 1);
     if (!isStaticImage) {//staticImage[0] == '\0') {
         ROS_INFO("No static image - stream from camera.");
-        image_sub_ = it_.subscribe("/camera/rgb/image_color", 1, &ImageConverter::imageCb, this);
-        depth_sub_ = it_.subscribe("/camera/depth_registered/image_raw", 1, &ImageConverter::depthCb, this);
-        //point_cloud_sub_ = nh_.subscribe("/head_mount_kinect/depth_registered/points", 1, &ImageConverter::depthCb, this);
-        //depth_sub_ = it_.subscribe("/head_mount_kinect/depth_registered/image_raw", 1, &ImageConverter::depthCb, this);
-        //depth_sub_ = it_.subscribe("/head_mount_kinect/depth_registered/points", 1, &ImageConverter::depthCb, this);
+        //image_sub_ = it_.subscribe("/camera/rgb/image_color", 1, &ImageConverter::imageCb, this);
+        //depth_sub_ = it_.subscribe("/camera/depth_registered/image_raw", 1, &ImageConverter::depthCb, this);
+        //point_cloud_sub_ = nh_.subscribe("/camera/depth_registered/points", 1, &ImageConverter::pointCloudCb, this);
+        
+        image_sub_ = it_.subscribe("/head_mount_kinect/rgb/image_raw", 1, &ImageConverter::imageCb, this);
+        point_cloud_sub_ = nh_.subscribe("/head_mount_kinect/depth_registered/points", 1, &ImageConverter::pointCloudCb, this);
     }
     else {
         ROS_INFO("Static image found.");
@@ -132,19 +141,19 @@ class ImageConverter
     blur( hsv[2], hsv[2], Size(3,3) );
 
     //output
-    //namedWindow( "Red", CV_WINDOW_AUTOSIZE );
-    //imshow( "Red", rgb[2] );
-    /*namedWindow( "Blue", CV_WINDOW_AUTOSIZE );
+    /*namedWindow( "Red", CV_WINDOW_AUTOSIZE );
+    imshow( "Red", rgb[2] );
+    namedWindow( "Blue", CV_WINDOW_AUTOSIZE );
     imshow( "Blue", rgb[1] );
     namedWindow( "Green", CV_WINDOW_AUTOSIZE );
-    imshow( "Green", rgb[0] );
+    imshow( "Green", rgb[0] );*/
 
-    namedWindow( "L", CV_WINDOW_AUTOSIZE );
-    imshow( "L", luv[2] );
+    //namedWindow( "L", CV_WINDOW_AUTOSIZE );
+    //imshow( "L", luv[2] );
     namedWindow( "U", CV_WINDOW_AUTOSIZE );
-    imshow( "U", luv[1] );*/
-    namedWindow( "lV", CV_WINDOW_AUTOSIZE );
-    imshow( "lV", luv[0] );
+    imshow( "U", luv[1] );
+    //namedWindow( "lV", CV_WINDOW_AUTOSIZE );
+    //imshow( "lV", luv[0] );
 
     /*namedWindow( "H", CV_WINDOW_AUTOSIZE );
     imshow( "H", hsv[2] );
@@ -158,8 +167,8 @@ class ImageConverter
     //blur( src_gray, src_gray, Size(3,3) );
     
     //set image to be processed
-    outputMat = luv[0];
-    //outputMat = rgb[2];
+    outputMat = luv[1];
+    //outputMat = rgb[0];
     
     //begin processing the image
     Mat canny_output;
@@ -248,17 +257,32 @@ class ImageConverter
   void processDepth() {
     Mat image = depth.clone();
     //if (image.ptr(0)[0] != 0) { //TODO: this is hacky as fuck.  fix it.
-        //cout << "image = "<< endl << " "  << image << endl << endl;
-        //cout << "x: " << outputCenter.x << ";  y: " << outputCenter.y << endl;
-        if (outputCenter.x != -1 && outputCenter.y != -1) {
-            //ROS_INFO("processDepth: %i", image.ptr(outputCenter.y)[outputCenter.x]);
-            ROS_INFO("processDepth: %i", image.at<uint16_t>(outputCenter.y, outputCenter.x));
-        }
-        waitKey(5);
-        imshow(DEPTH_WINDOW, image);
+    //cout << "image = "<< endl << " "  << image << endl << endl;
+    //cout << "x: " << outputCenter.x << ";  y: " << outputCenter.y << endl;
+    if (outputCenter.x != -1 && outputCenter.y != -1) {
+        //ROS_INFO("processDepth: %i", image.ptr(outputCenter.y)[outputCenter.x]);
+        ROS_INFO("processDepth: %i", image.at<uint16_t>(outputCenter.y, outputCenter.x));
+    }
+    waitKey(5);
+    imshow(DEPTH_WINDOW, image);
     //}
 
     //image_pub_.publish(cv_ptr->toImageMsg());
+  }
+  
+  void pointCloudCb(const sensor_msgs::PointCloud2ConstPtr &cloud) {
+    // Convert to a templated type
+    pcl::PointCloud<pcl::PointXYZ> cloud_xyz;
+    pcl::fromROSMsg (*cloud, cloud_xyz);
+    int index = outputCenter.y*imageWidth + outputCenter.x;
+    if (outputCenter.x != -1 && outputCenter.y != -1 && imageWidth != -1) {
+        ROS_INFO("transformed points:  x: %f; y: %f; z: %f", cloud_xyz.points[index].x, cloud_xyz.points[index].y, cloud_xyz.points[index].z);
+        geometry_msgs::Point point;// point();
+        point.x = cloud_xyz.points[index].x;
+        point.y = cloud_xyz.points[index].y;
+        point.z = cloud_xyz.points[index].z;
+        point_pub_.publish(point);
+    }
   }
   
   /*
@@ -289,6 +313,7 @@ class ImageConverter
    */
   void imageCb(const sensor_msgs::ImageConstPtr& msg)
   {
+    imageWidth = (*msg).width;
     //covert the rosimage into an openCV Mat image
     cv_bridge::CvImagePtr cv_ptr;
     try
@@ -316,8 +341,10 @@ int main(int argc, char** argv)
 {
   ROS_INFO("===========Entered main===========");
   ros::init(argc, argv, "image_converter");
-  //ImageConverter ImageConverter::instance = ImageConverter(argc > 1, argv[1]);
+  ROS_INFO("===========After ros::init===========");
   ImageConverter ic(argc > 1, argv[1]);
+  ROS_INFO("===========After Constructor===========");
   ros::spin();
+  ROS_INFO("===========After ros::spin===========");
   return 0;
 }
