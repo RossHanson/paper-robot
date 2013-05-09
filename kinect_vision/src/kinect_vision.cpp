@@ -33,7 +33,12 @@ class ImageConverter
   image_transport::Subscriber depth_sub_;
   
   ros::Subscriber point_cloud_sub_;
-  ros::Publisher point_pub_;
+  ros::Publisher centerRect_pub;
+  ros::Publisher topLeftRect_pub;
+  ros::Publisher topRightRect_pub;
+  ros::Publisher botLeftRect_pub;
+  ros::Publisher botRightRect_pub;
+  
   
   Mat outputMat;
   int threshCanny;
@@ -46,6 +51,7 @@ class ImageConverter
   Mat depth;
   Point2i outputCenter;
   int imageWidth;
+  Rect outputRect;
   
   //public: static ImageConverter instance;// = 0;
   
@@ -71,7 +77,14 @@ class ImageConverter
     createTrackbar( " Min Rect Size:", WINDOW, &minRectSize, maxRectSize, &processImageCallback, this );
     
     ROS_INFO("Initialization finished.");
-    point_pub_ = nh_.advertise<geometry_msgs::Point>("/paper_robot/paper/position", 1);
+    
+    centerRect_pub = nh_.advertise<geometry_msgs::Point>("/paper_robot/paper/center", 1);
+    topLeftRect_pub = nh_.advertise<geometry_msgs::Point>("/paper_robot/paper/top_left_corner", 1);
+    topRightRect_pub = nh_.advertise<geometry_msgs::Point>("/paper_robot/paper/top_right_corner", 1);
+    botLeftRect_pub = nh_.advertise<geometry_msgs::Point>("/paper_robot/paper/bot_left_corner", 1);
+    botRightRect_pub = nh_.advertise<geometry_msgs::Point>("/paper_robot/paper/bot_right_corner", 1);
+    
+    
     if (!isStaticImage) {//staticImage[0] == '\0') {
         ROS_INFO("No static image - stream from camera.");
         //image_sub_ = it_.subscribe("/camera/rgb/image_color", 1, &ImageConverter::imageCb, this);
@@ -233,6 +246,7 @@ class ImageConverter
         //printf("The area of the paper is:  %i\n", boundRect[largestRect].area());
         outputCenter.x = center[largestRect].x;
         outputCenter.y = center[largestRect].y;
+        outputRect = boundRect[largestRect];
         
     }
     else {
@@ -274,14 +288,45 @@ class ImageConverter
     // Convert to a templated type
     pcl::PointCloud<pcl::PointXYZ> cloud_xyz;
     pcl::fromROSMsg (*cloud, cloud_xyz);
-    int index = outputCenter.y*imageWidth + outputCenter.x;
+    int index;
     if (outputCenter.x != -1 && outputCenter.y != -1 && imageWidth != -1) {
+        index = outputCenter.y*imageWidth + outputCenter.x;
         ROS_INFO("transformed points:  x: %f; y: %f; z: %f", cloud_xyz.points[index].x, cloud_xyz.points[index].y, cloud_xyz.points[index].z);
-        geometry_msgs::Point point;// point();
-        point.x = cloud_xyz.points[index].x;
-        point.y = cloud_xyz.points[index].y;
-        point.z = cloud_xyz.points[index].z;
-        point_pub_.publish(point);
+        geometry_msgs::Point centerPoint;
+        centerPoint.x = cloud_xyz.points[index].x;
+        centerPoint.y = cloud_xyz.points[index].y;
+        centerPoint.z = cloud_xyz.points[index].z;
+        centerRect_pub.publish(centerPoint);
+        
+        index = outputRect.tl().y*imageWidth + outputRect.tl().x;
+        geometry_msgs::Point topLeftPoint;
+        topLeftPoint.x = cloud_xyz.points[index].x;
+        topLeftPoint.y = cloud_xyz.points[index].y;
+        topLeftPoint.z = cloud_xyz.points[index].z;
+        topLeftRect_pub.publish(topLeftPoint);
+        
+        index = outputRect.tl().y*imageWidth + (outputRect.tl().x + outputRect.width);
+        geometry_msgs::Point topRightPoint;
+        topRightPoint.x = cloud_xyz.points[index].x;
+        topRightPoint.y = cloud_xyz.points[index].y;
+        topRightPoint.z = cloud_xyz.points[index].z;
+        topRightRect_pub.publish(topRightPoint);
+        
+        index = outputRect.br().y*imageWidth + (outputRect.br().x - outputRect.width);
+        geometry_msgs::Point botLeftPoint;
+        botLeftPoint.x = cloud_xyz.points[index].x;
+        botLeftPoint.y = cloud_xyz.points[index].y;
+        botLeftPoint.z = cloud_xyz.points[index].z;
+        botLeftRect_pub.publish(botLeftPoint);
+        
+        index = outputRect.br().y*imageWidth + outputRect.br().x;
+        geometry_msgs::Point botRightPoint;
+        botRightPoint.x = cloud_xyz.points[index].x;
+        botRightPoint.y = cloud_xyz.points[index].y;
+        botRightPoint.z = cloud_xyz.points[index].z;
+        botRightRect_pub.publish(botRightPoint);
+        
+        
     }
   }
   
